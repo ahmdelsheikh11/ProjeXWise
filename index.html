@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول | ProjeXWise Kitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-body app-loading">
+    <div class="page-loader page-loader--auth" id="pageLoader" aria-live="polite" aria-busy="true">
+      <div class="page-loader__backdrop"></div>
+      <div class="page-loader__card">
+        <div class="page-loader__brand">ProjeXWise Kitchen</div>
+        <div class="page-loader__spinner" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="page-loader__title">نجهز صفحة الدخول</h2>
+        <p class="page-loader__text" id="pageLoaderText">نراجع الاتصال والجلسة الحالية قبل ما نظهر الصفحة.</p>
+      </div>
+    </div>
+    <main class="auth-shell">
+      <section class="auth-hero">
+        <span class="auth-hero__eyebrow">كلمة خفيفة قبل الشغل</span>
+        <h1 class="auth-hero__title" id="authHeroTitle">الشغل المتقن يكبر خطوة خطوة</h1>
+        <p class="auth-hero__text" id="authHeroText">
+          خذ كل خطوة على مهلها، وخل شغلك واضح ونظيف، فالمداومة الهادية تصنع نتيجة محترمة.
+        </p>
+        <div class="auth-hero__bullets">
+          <div class="auth-hero__bullet" id="authHeroHint1">رتب يومك، وابدأ بالأهم، والباقي يتظبط.</div>
+          <div class="auth-hero__bullet" id="authHeroHint2">الدقة من أول مرة توفر تعب كثير بعدين.</div>
+          <div class="auth-hero__bullet" id="authHeroHint3">الاستمرار الهادئ أحسن من السرعة المشتتة.</div>
+        </div>
+      </section>
+
+      <section class="auth-card">
+        <div class="auth-card__header">
+          <div>
+            <div class="auth-card__brand">ProjeXWise Kitchen</div>
+            <h2 class="auth-card__title">أهلاً بك</h2>
+          </div>
+          <p class="auth-card__subtitle">ادخل باسم المستخدم أو البريد وكلمة المرور، وخلينا نبدأ الشغل بهدوء وترتيب.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="اختيار العملية">
+          <button class="auth-tab is-active" id="loginTabBtn" data-auth-tab="login" type="button">تسجيل الدخول</button>
+          <button class="auth-tab" id="registerTabBtn" data-auth-tab="register" type="button">مستخدم جديد</button>
+        </div>
+
+        <div class="auth-status" id="authStatus" hidden></div>
+
+        <form class="auth-form is-active" id="loginForm" autocomplete="on">
+          <div class="form-field">
+            <label class="form-label" for="loginIdentifier">اسم المستخدم أو البريد</label>
+            <input class="form-input" id="loginIdentifier" name="username" type="text" placeholder="مثال: ahmed أو you@example.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="loginPassword">كلمة المرور</label>
+            <input class="form-input" id="loginPassword" name="password" type="password" placeholder="********" required />
+          </div>
+          <button class="auth-link" id="forgotPasswordBtn" type="button">نسيت كلمة المرور؟</button>
+          <button class="btn btn--primary auth-submit" id="loginSubmitBtn" type="submit">دخول إلى النظام</button>
+        </form>
+
+        <form class="auth-form" id="resetForm" autocomplete="on">
+          <div class="form-field">
+            <label class="form-label" for="resetIdentifier">اسم المستخدم أو البريد</label>
+            <input class="form-input" id="resetIdentifier" name="resetIdentifier" type="text" placeholder="أدخل اسم المستخدم أو البريد" required />
+          </div>
+          <button class="btn btn--primary auth-submit" id="resetSubmitBtn" type="submit">إرسال رابط الاستعادة</button>
+          <button class="auth-link" id="backToLoginBtn" type="button">العودة إلى تسجيل الدخول</button>
+          <p class="auth-hint">سيصلك رابط إعادة تعيين كلمة المرور على البريد الإلكتروني المرتبط بالحساب.</p>
+        </form>
+
+        <form class="auth-form" id="registerForm" autocomplete="on">
+          <div class="form-field">
+            <label class="form-label" for="registerDisplayName">الاسم الظاهر</label>
+            <input class="form-input" id="registerDisplayName" name="displayName" type="text" placeholder="الاسم الكامل" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="registerUsername">اسم المستخدم</label>
+            <input class="form-input" id="registerUsername" name="username" type="text" placeholder="اسم قصير بدون مسافات" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="registerEmail">البريد الإلكتروني</label>
+            <input class="form-input" id="registerEmail" name="email" type="email" placeholder="name@example.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="registerPassword">كلمة المرور</label>
+            <input class="form-input" id="registerPassword" name="password" type="password" placeholder="8 أحرف أو أكثر" minlength="8" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="registerConfirmPassword">تأكيد كلمة المرور</label>
+            <input class="form-input" id="registerConfirmPassword" name="confirmPassword" type="password" placeholder="أعد كتابة كلمة المرور" minlength="8" required />
+          </div>
+          <button class="btn btn--success auth-submit" id="registerSubmitBtn" type="submit">إنشاء الحساب</button>
+          <p class="auth-hint">أي حساب جديد يُنشأ بدور مشاهد للمشاريع فقط، ويمكن ترقية الصلاحيات من لوحة التحكم الإدارية.</p>
+        </form>
+      </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>

@@ -2283,8 +2283,7 @@ body, .app-header, .card, .form-input, .btn, .modal__content,
     gap: 14px;
 }
 .admin-summary__card,
-.admin-user-card,
-.admin-settings-card {
+.admin-user-card {
     border: 1px solid var(--clr-border);
     background: var(--clr-surface-elevated);
     border-radius: 18px;
@@ -2305,56 +2304,6 @@ body, .app-header, .card, .form-input, .btn, .modal__content,
 .admin-users-list {
     display: grid;
     gap: 14px;
-}
-.admin-settings-card {
-    padding: 18px;
-    display: grid;
-    gap: 16px;
-}
-.admin-settings-card__header {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    align-items: flex-start;
-}
-.admin-settings-card__title {
-    margin: 0;
-    font-size: 20px;
-}
-.admin-settings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 12px;
-}
-.admin-settings-grid__full {
-    grid-column: 1 / -1;
-}
-.admin-logo-preview {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    padding: 14px;
-    border-radius: 16px;
-    border: 1px dashed var(--clr-border);
-    background: rgba(255,255,255,0.03);
-}
-.admin-logo-preview img {
-    width: 120px;
-    height: 56px;
-    object-fit: contain;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.06);
-    padding: 8px;
-}
-.admin-logo-preview__meta {
-    display: grid;
-    gap: 4px;
-    color: var(--clr-ink-soft);
-    min-width: 180px;
-}
-.admin-logo-preview[hidden] {
-    display: none !important;
 }
 .admin-user-card {
     padding: 18px;
@@ -2717,21 +2666,11 @@ body, .app-header, .card, .form-input, .btn, .modal__content,
     .admin-user-permissions {
         grid-template-columns: 1fr;
     }
-    .admin-settings-grid {
-        grid-template-columns: 1fr;
-    }
     .dashboard-table {
         min-width: 640px;
     }
     .admin-user-grid {
         grid-template-columns: 1fr;
-    }
-    .admin-logo-preview {
-        align-items: flex-start;
-    }
-    .admin-logo-preview img {
-        width: 100%;
-        max-width: 160px;
     }
     .admin-user-actions .btn {
         width: 100%;

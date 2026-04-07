@@ -106,7 +106,6 @@
         canExportProjects: false,
         canManageDesigns: false,
         canManageUsers: false,
-        canManageAppSettings: false,
         canViewActivityLogs: false,
     });
 
@@ -120,7 +119,6 @@
             canEditProjects: true,
             canExportProjects: true,
             canManageDesigns: true,
-            canManageAppSettings: false,
             canViewActivityLogs: false,
         },
         manager: {
@@ -134,7 +132,6 @@
             canImportProjects: true,
             canExportProjects: true,
             canManageDesigns: true,
-            canManageAppSettings: false,
             canViewActivityLogs: false,
         },
         admin: {
@@ -149,7 +146,6 @@
             canExportProjects: true,
             canManageDesigns: true,
             canManageUsers: true,
-            canManageAppSettings: true,
             canViewActivityLogs: true,
         },
         super_admin: {
@@ -164,7 +160,6 @@
             canExportProjects: true,
             canManageDesigns: true,
             canManageUsers: true,
-            canManageAppSettings: true,
             canViewActivityLogs: true,
         },
     });

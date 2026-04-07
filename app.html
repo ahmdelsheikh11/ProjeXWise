@@ -13,7 +13,7 @@
     <div class="page-loader" id="pageLoader" aria-live="polite" aria-busy="true">
       <div class="page-loader__backdrop"></div>
       <div class="page-loader__card">
-        <div class="page-loader__brand" id="pageLoaderBrand">ProjeXWise Kitchen</div>
+        <div class="page-loader__brand">ProjeXWise Kitchen</div>
         <div class="page-loader__spinner" aria-hidden="true">
           <span></span>
           <span></span>
@@ -27,13 +27,12 @@
     <!-- â”€â”€â”€ HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <header class="app-header">
       <div class="header__brand">
-        <img class="header__logo visible" id="appHeaderLogo"
-          data-default-src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTIwIDQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjMWEyZDUwIi8+PHRleHQgeD0iMTAiIHk9IjI2IiBmb250LWZhbWlseT0iSUJNIFBsZXggU2FucyBBcmFiaWMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzNkOGVmMCI+UHJvamVYV2lzZTwvdGV4dD48L3N2Zz4="
+        <img class="header__logo visible"
           src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTIwIDQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjMWEyZDUwIi8+PHRleHQgeD0iMTAiIHk9IjI2IiBmb250LWZhbWlseT0iSUJNIFBsZXggU2FucyBBcmFiaWMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzNkOGVmMCI+UHJvamVYV2lzZTwvdGV4dD48L3N2Zz4="
           alt="شعار الشركة" />
         <div class="header__title-wrap">
-          <h1 class="header__title" id="appCompanyName">ProjeXWise Kitchen</h1>
-          <span class="header__subtitle" id="appCompanySubtitle">نظام إدارة مشاريع مطابخ ألومينيوم</span>
+          <h1 class="header__title">ProjeXWise Kitchen</h1>
+          <span class="header__subtitle">نظام إدارة مشاريع مطابخ ألومينيوم</span>
         </div>
       </div>
       <nav class="header__nav view-switcher" aria-label="التنقل بين الصفحات">
@@ -909,7 +908,7 @@
         <div class="modal__header">
           <div>
             <h2 class="modal__title" id="adminPanelTitle">لوحة التحكم الإدارية</h2>
-            <p class="admin-modal__subtitle">تتحكم هذه اللوحة في صلاحيات المستخدمين وإعدادات التطبيق العامة حسب الصلاحيات المتاحة لحسابك.</p>
+            <p class="admin-modal__subtitle">هذه اللوحة تظهر فقط للحساب المالك وتتحكم في صلاحيات المستخدمين وما يظهر لهم داخل النظام.</p>
           </div>
           <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
             <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -917,60 +916,12 @@
         </div>
         <div class="modal__body admin-modal__body">
           <div class="admin-summary" id="adminSummary"></div>
-          <section class="admin-settings-card" id="adminSettingsCard" hidden>
-            <div class="admin-settings-card__header">
-              <div>
-                <h3 class="admin-settings-card__title">إعدادات التطبيق</h3>
-                <p class="admin-modal__subtitle">يمكنك تخصيص الهوية البصرية وكود المشروع وبعض القيم الافتراضية لتجربة أكثر مرونة واحترافية.</p>
-              </div>
-            </div>
-            <div class="admin-settings-grid">
-              <div class="form-field">
-                <label class="form-label" for="settingsCompanyName">اسم الشركة</label>
-                <input type="text" id="settingsCompanyName" class="form-input" placeholder="يُترك فارغًا لاستخدام الاسم الحالي" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="settingsCompanySubtitle">الوصف المختصر</label>
-                <input type="text" id="settingsCompanySubtitle" class="form-input" placeholder="مثال: نظام إدارة مشاريع مطابخ ألومينيوم" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="settingsProjectCodePrefix">أول 3 حروف من كود المشروع</label>
-                <input type="text" id="settingsProjectCodePrefix" class="form-input form-input--mono" maxlength="3" placeholder="AMK" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="settingsDefaultSalesName">اسم البائع الافتراضي</label>
-                <input type="text" id="settingsDefaultSalesName" class="form-input" placeholder="يُستخدم عند إنشاء مشروع جديد" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="settingsDefaultTaxRate">نسبة الضريبة الافتراضية (%)</label>
-                <input type="number" id="settingsDefaultTaxRate" class="form-input" min="0" max="100" step="1" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="settingsDashboardDelayDays">اعتبار المشروع متأخرًا بعد (يوم)</label>
-                <input type="number" id="settingsDashboardDelayDays" class="form-input" min="1" max="365" step="1" />
-              </div>
-              <div class="form-field admin-settings-grid__full">
-                <label class="form-label" for="settingsCompanyLogoFile">لوجو الشركة</label>
-                <input type="file" id="settingsCompanyLogoFile" class="form-input" accept="image/*" />
-                <p class="auth-hint">ارفع صورة صغيرة وواضحة. لو لم ترفع لوجو سيبقى الشكل الحالي كما هو.</p>
-              </div>
-            </div>
-            <div class="admin-logo-preview" id="settingsLogoPreviewWrap">
-              <img id="settingsLogoPreview" alt="معاينة شعار الشركة" />
-              <div class="admin-logo-preview__meta">
-                <strong>معاينة الشعار</strong>
-                <span>يظهر في الهيدر والتقارير عند الحفظ.</span>
-              </div>
-              <button class="btn btn--ghost btn--sm" type="button" data-action="remove-company-logo">إزالة الشعار المخصص</button>
-            </div>
-          </section>
           <div class="admin-toolbar">
             <button class="btn btn--secondary btn--sm" data-action="open-activity-log">سجل النشاطات</button>
           </div>
           <div class="admin-users-list" id="adminUsersList"></div>
         </div>
         <div class="modal__footer">
-          <button class="btn btn--primary btn--sm" data-action="save-app-settings" id="saveAppSettingsBtn" hidden>حفظ إعدادات التطبيق</button>
           <button class="btn btn--primary btn--sm" data-action="refresh-admin-panel">تحديث القائمة</button>
           <button class="btn btn--ghost btn--sm" data-action="close-modal">إغلاق</button>
         </div>

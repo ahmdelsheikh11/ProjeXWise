@@ -79,16 +79,6 @@ const CONFIG = Object.freeze({
     AUTO_SAVE_DELAY:  5000,
 });
 
-const DEFAULT_APP_SETTINGS = Object.freeze({
-    companyName: 'ProjeXWise Kitchen',
-    companySubtitle: 'نظام إدارة مشاريع مطابخ ألومينيوم',
-    projectCodePrefix: 'AMK',
-    defaultSalesName: '',
-    defaultTaxRate: 5,
-    dashboardDelayDays: 14,
-    companyLogoData: '',
-});
-
 // Flat list of workflow step keys for iteration
 const WORKFLOW_STEP_KEYS = CONFIG.WORKFLOW_STEPS.map(s => s.key);
 
@@ -111,7 +101,7 @@ function createEmptyProject() {
         emirate:   '',
         address:   '',
         location:  '',
-        sales:     getDefaultSalesName(),
+        sales:     '',
         date:      todayString(),
         deliveryDate: '',
         specifications: {
@@ -150,8 +140,6 @@ const AppState = {
     firebase: null,
     authUser: null,
     currentUserProfile: null,
-    appSettings: {},
-    appSettingsDraftLogoData: '',
     usersCache: [],
     hasActiveProject: false,
 };
@@ -169,64 +157,6 @@ function todayString() {
     return new Date().toISOString().split('T')[0];
 }
 
-function clampNumber(value, min, max, fallback) {
-    const parsed = Number(value);
-    if (Number.isNaN(parsed)) return fallback;
-    return Math.min(max, Math.max(min, parsed));
-}
-
-function sanitiseProjectCodePrefix(value) {
-    const cleaned = String(value || '')
-        .toUpperCase()
-        .replace(/[^A-Z0-9]/g, '')
-        .slice(0, 3);
-    return cleaned || DEFAULT_APP_SETTINGS.projectCodePrefix;
-}
-
-function normaliseAppSettings(settings = {}) {
-    return {
-        companyName: String(settings.companyName || '').trim(),
-        companySubtitle: String(settings.companySubtitle || '').trim(),
-        projectCodePrefix: sanitiseProjectCodePrefix(settings.projectCodePrefix),
-        defaultSalesName: String(settings.defaultSalesName || '').trim(),
-        defaultTaxRate: clampNumber(settings.defaultTaxRate, 0, 100, DEFAULT_APP_SETTINGS.defaultTaxRate),
-        dashboardDelayDays: clampNumber(settings.dashboardDelayDays, 1, 365, DEFAULT_APP_SETTINGS.dashboardDelayDays),
-        companyLogoData: String(settings.companyLogoData || '').trim(),
-    };
-}
-
-function getRawAppSettings() {
-    return normaliseAppSettings(AppState.appSettings || {});
-}
-
-function getCompanyName() {
-    return getRawAppSettings().companyName || DEFAULT_APP_SETTINGS.companyName;
-}
-
-function getCompanySubtitle() {
-    return getRawAppSettings().companySubtitle || DEFAULT_APP_SETTINGS.companySubtitle;
-}
-
-function getProjectCodePrefix() {
-    return sanitiseProjectCodePrefix(getRawAppSettings().projectCodePrefix);
-}
-
-function getDefaultSalesName() {
-    return getRawAppSettings().defaultSalesName || DEFAULT_APP_SETTINGS.defaultSalesName;
-}
-
-function getDefaultTaxRate() {
-    return clampNumber(getRawAppSettings().defaultTaxRate, 0, 100, DEFAULT_APP_SETTINGS.defaultTaxRate);
-}
-
-function getDashboardDelayDays() {
-    return clampNumber(getRawAppSettings().dashboardDelayDays, 1, 365, DEFAULT_APP_SETTINGS.dashboardDelayDays);
-}
-
-function getCompanyLogoData() {
-    return getRawAppSettings().companyLogoData || '';
-}
-
 /** Generates a unique project ID */
 function generateProjectId() {
     const d    = new Date();
@@ -234,7 +164,7 @@ function generateProjectId() {
     const mm   = String(d.getMonth() + 1).padStart(2, '0');
     const dd   = String(d.getDate()).padStart(2, '0');
     const rand = String(Math.floor(Math.random() * 50)).padStart(2, '0');
-    return `${getProjectCodePrefix()}-JO-${yy}${mm}${dd}-${rand}`;
+    return `AMK-JO-${yy}${mm}${dd}-${rand}`;
 }
 
 /** Formats a number to 2 decimal places with locale separators */
@@ -276,12 +206,6 @@ function deepClone(obj) {
 /** Returns the default paint colour (door colour) */
 function getDefaultPaintColor() {
     return AppState.current.specifications.doorColor || '';
-}
-
-function isProjectDelayed(project) {
-    const contractDate = project?.dates?.contractDate || project?.date || todayString();
-    const days = Math.floor((Date.now() - new Date(contractDate)) / 86400000);
-    return days > getDashboardDelayDays() && (project?.progress || 0) < 70 && !project?.workflow?.handover_signed;
 }
 
 // â”€â”€â”€ Financial calculations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -416,7 +340,6 @@ const OWNER_EMAIL = (window.KPM_OWNER_EMAIL || 'ahmd.elshiekh@gmail.com').toLowe
 const FIREBASE_COLLECTIONS = Object.freeze({
     PROJECTS: 'projects',
     MATERIALS: 'materials',
-    APP_SETTINGS: 'appSettings',
     USER_PROFILES: 'userProfiles',
     USERNAMES: 'usernames',
     PROJECT_DESIGNS: 'projectDesigns',
@@ -434,7 +357,6 @@ const DEFAULT_PERMISSIONS = Object.freeze({
     canExportProjects: false,
     canManageDesigns: false,
     canManageUsers: false,
-    canManageAppSettings: false,
     canViewActivityLogs: false,
 });
 const ROLE_PRESETS = Object.freeze({
@@ -447,7 +369,6 @@ const ROLE_PRESETS = Object.freeze({
         canEditProjects: true,
         canExportProjects: true,
         canManageDesigns: true,
-        canManageAppSettings: false,
         canViewActivityLogs: false,
     },
     manager: {
@@ -461,7 +382,6 @@ const ROLE_PRESETS = Object.freeze({
         canImportProjects: true,
         canExportProjects: true,
         canManageDesigns: true,
-        canManageAppSettings: false,
         canViewActivityLogs: false,
     },
     admin: {
@@ -476,7 +396,6 @@ const ROLE_PRESETS = Object.freeze({
         canExportProjects: true,
         canManageDesigns: true,
         canManageUsers: true,
-        canManageAppSettings: true,
         canViewActivityLogs: true,
     },
     super_admin: {
@@ -491,7 +410,6 @@ const ROLE_PRESETS = Object.freeze({
         canExportProjects: true,
         canManageDesigns: true,
         canManageUsers: true,
-        canManageAppSettings: true,
         canViewActivityLogs: true,
     },
 });
@@ -545,11 +463,6 @@ function requirePermission(permission, message = 'ليست لديك صلاحية
     if (hasPermission(permission)) return true;
     Toast.show(message, 'error');
     return false;
-}
-
-function canOpenAdminPanel() {
-    const permissions = getCurrentPermissions();
-    return Boolean(permissions.canManageUsers || permissions.canManageAppSettings);
 }
 
 function normaliseUsername(value) {
@@ -622,26 +535,7 @@ const DB = {
         AppState.authUser = user;
         AppState.currentUserProfile = await AuthSession.ensureProfile(user);
         AppState.db = services.db;
-        AppState.appSettings = await this.loadAppSettings();
         return AppState.db;
-    },
-
-    async loadAppSettings() {
-        const { db } = getFirebaseServices();
-        const snap = await db.collection(FIREBASE_COLLECTIONS.APP_SETTINGS).doc('global').get();
-        return normaliseAppSettings(snap.exists ? snap.data() : {});
-    },
-
-    async saveAppSettings(settings) {
-        const { db } = getFirebaseServices();
-        const payload = {
-            ...normaliseAppSettings(settings),
-            updatedAt: new Date().toISOString(),
-            updatedBy: getActorSnapshot(),
-        };
-        await db.collection(FIREBASE_COLLECTIONS.APP_SETTINGS).doc('global').set(payload, { merge: true });
-        AppState.appSettings = payload;
-        return payload;
     },
 
     async saveProject(project) {
@@ -1316,7 +1210,7 @@ const LPO = {
         const stageKey   = document.getElementById('lpoStageSelect').value;
         const supplier   = document.getElementById('lpoSupplierInput').value.trim();
         const includeTax = document.getElementById('lpoTaxInput').checked;
-        const taxRate    = parseFloat(document.getElementById('lpoTaxRateInput').value) || getDefaultTaxRate();
+        const taxRate    = parseFloat(document.getElementById('lpoTaxRateInput').value) || CONFIG.DEFAULT_TAX_RATE;
 
         if (!supplier) { Toast.show('يجب إدخال اسم المورد', 'error'); return; }
 
@@ -1327,7 +1221,7 @@ const LPO = {
     generateFull() {
         const supplier   = document.getElementById('lpoSupplierInput').value.trim() || 'â€”';
         const includeTax = document.getElementById('lpoTaxInput').checked;
-        const taxRate    = parseFloat(document.getElementById('lpoTaxRateInput').value) || getDefaultTaxRate();
+        const taxRate    = parseFloat(document.getElementById('lpoTaxRateInput').value) || CONFIG.DEFAULT_TAX_RATE;
 
         const allItems = Object.entries(AppState.current.items).flatMap(([stage, items]) =>
             items.map(item => ({ ...item, stageLabel: CONFIG.STAGES[stage] }))
@@ -1478,8 +1372,7 @@ const ReportGenerator = {
 
     _financialSection(project) {
         const materialsTotal = calcMaterialsTotal(project);
-        const taxRate        = getDefaultTaxRate();
-        const autoTax        = materialsTotal * taxRate / 100;
+        const autoTax        = materialsTotal * CONFIG.AUTO_TAX_RATE / 100;
         const totalWithTax   = materialsTotal + autoTax;
         const agreed         = project.financials.totalAmount;
         const paid           = project.financials.paid;
@@ -1490,7 +1383,7 @@ const ReportGenerator = {
             <div class="financial-summary">
                 <div class="summary-grid">
                     <div class="summary-item"><div class="summary-label">إجمالي المواد</div><div class="summary-value">${formatNumber(materialsTotal)}</div></div>
-                    <div class="summary-item"><div class="summary-label">الضريبة (${taxRate}%)</div><div class="summary-value">${formatNumber(autoTax)}</div></div>
+                    <div class="summary-item"><div class="summary-label">الضريبة (${CONFIG.AUTO_TAX_RATE}%)</div><div class="summary-value">${formatNumber(autoTax)}</div></div>
                     <div class="summary-item"><div class="summary-label">الإجمالي بعد الضريبة</div><div class="summary-value">${formatNumber(totalWithTax)}</div></div>
                     <div class="summary-item"><div class="summary-label">المبلغ المتفق عليه</div><div class="summary-value">${formatNumber(agreed)}</div></div>
                 </div>
@@ -1552,7 +1445,7 @@ const ReportGenerator = {
     },
 
     async generateProjectsReport(projects) {
-        const logoData = getCompanyLogoData() || document.getElementById('appHeaderLogo')?.dataset.defaultSrc || '';
+        const logoData = null; // Logo is hardcoded in HTML â€” no dynamic loading needed
         const sorted   = [...projects].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
         const rows = sorted.map((p, idx) => {
@@ -1593,15 +1486,14 @@ const ReportGenerator = {
         <body>
             <div class="report-header">
                 ${logoData ? `<img src="${logoData}" alt="شعار الشركة">` : ''}
-                <h1>${escapeHtml(getCompanyName())}</h1>
-                <div class="date">${escapeHtml(getCompanySubtitle())}</div>
+                <h1>كشف بجميع المشاريع</h1>
                 <div class="date">تم الإنشاء: ${new Date().toLocaleDateString('ar-EG')}</div>
             </div>
             <table>
                 <thead><tr><th>#</th><th>رقم المشروع</th><th>العميل</th><th>الهاتف</th><th>الإمارة</th><th>التاريخ</th><th>إجمالي المواد</th><th>المبلغ المتفق</th><th>المدفوع</th><th>المتبقي</th><th>المرحلة</th></tr></thead>
                 <tbody>${rows}</tbody>
             </table>
-            <div class="print-footer">${escapeHtml(getCompanyName())} - ${escapeHtml(getCompanySubtitle())}</div>
+            <div class="print-footer">شركة المحيط الأخضر — نظام إدارة المشاريع</div>
         </body></html>`;
     },
 };
@@ -2121,7 +2013,10 @@ const Dashboard = {
         const total        = projects.length;
         const active       = projects.filter(p => !p.workflow.handover_signed).length;
         const delivered    = projects.filter(p => p.workflow.handover_signed).length;
-        const delayed      = projects.filter((p) => isProjectDelayed({ ...p, date: contractDate(p) })).length;
+        const delayed      = projects.filter(p => {
+            const days = Math.floor((Date.now() - new Date(contractDate(p))) / 86400000);
+            return days > 14 && p.progress < 70 && !p.workflow.handover_signed;
+        }).length;
         const inProduction = projects.filter(p => ['frame_purchase','frame_fabrication','frame_delivery','frame_installation','panel_purchase','panel_fabrication','panel_installation','quality_control','finishing_purchase'].includes(p.currentStage)).length;
         const waitInstall  = projects.filter(p => p.currentStage === 'finishing_installation').length;
         const averageProgress = Math.round(projects.reduce((sum, p) => sum + (p.progress || 0), 0) / total);
@@ -2141,7 +2036,7 @@ const Dashboard = {
 
         const tableRows = projects.map(p => {
             const days      = Math.floor((Date.now() - new Date(contractDate(p))) / 86400000);
-            const isDelayed = isProjectDelayed({ ...p, date: contractDate(p) });
+            const isDelayed = days > 14 && p.progress < 70 && !p.workflow.handover_signed;
             let rem = '-';
             let remClass = '';
             if (p.dates?.deliveryDate) {
@@ -2222,7 +2117,7 @@ const Dashboard = {
                             <div class="dashboard-insight-card">
                                 <span class="dashboard-insight-card__label">المشاريع المتأخرة</span>
                                 <div class="dashboard-insight-card__value">${delayed}</div>
-                                <div class="dashboard-insight-card__hint">مشاريع تجاوزت ${getDashboardDelayDays()} يومًا ولم تصل إلى 70%.</div>
+                                <div class="dashboard-insight-card__hint">مشاريع تجاوزت 14 يومًا ولم تصل إلى 70%.</div>
                             </div>
                             <div class="dashboard-insight-card">
                                 <span class="dashboard-insight-card__label">المشاريع المسلمة</span>
@@ -2484,8 +2379,9 @@ async function handleAction(e) {
 
     const action = target.dataset.action;
     const actionPermissions = {
+        'open-admin-panel': 'canManageUsers',
+        'refresh-admin-panel': 'canManageUsers',
         'save-user-access': 'canManageUsers',
-        'save-app-settings': 'canManageAppSettings',
         'open-activity-log': 'canViewActivityLogs',
         'refresh-activity-log': 'canViewActivityLogs',
         'logout': 'canViewProjects',
@@ -2524,10 +2420,6 @@ async function handleAction(e) {
         'toggle-workflow': 'canEditProjects',
     };
 
-    if (['open-admin-panel', 'refresh-admin-panel'].includes(action) && !canOpenAdminPanel()) {
-        Toast.show('ليست لديك صلاحية للوصول إلى لوحة التحكم', 'error');
-        return;
-    }
     if (actionPermissions[action] && !requirePermission(actionPermissions[action])) return;
     const financialActions = new Set(['export-project', 'print-full-report', 'print-projects-table', 'generate-lpo', 'generate-full-lpo', 'print-lpo']);
     if (financialActions.has(action) && !requirePermission('canViewFinancials', 'لا تملك صلاحية الوصول إلى المعاملات المادية')) return;
@@ -2696,17 +2588,6 @@ async function handleAction(e) {
 
         case 'save-user-access': {
             await AdminPanel.saveUser(target.dataset.uid);
-            break;
-        }
-
-        case 'save-app-settings': {
-            await AppSettingsManager.save();
-            await AdminPanel.render();
-            break;
-        }
-
-        case 'remove-company-logo': {
-            AppSettingsManager.removeLogo();
             break;
         }
 
@@ -3162,162 +3043,6 @@ const AuthSession = {
     },
 };
 
-const Branding = {
-    apply() {
-        const companyName = getCompanyName();
-        const companySubtitle = getCompanySubtitle();
-        const logoEl = document.getElementById('appHeaderLogo');
-        const defaultLogo = logoEl?.dataset.defaultSrc || '';
-        const logoData = getCompanyLogoData() || defaultLogo;
-
-        const companyNameEl = document.getElementById('appCompanyName');
-        const companySubtitleEl = document.getElementById('appCompanySubtitle');
-        const loaderBrandEl = document.getElementById('pageLoaderBrand');
-
-        if (companyNameEl) companyNameEl.textContent = companyName;
-        if (companySubtitleEl) companySubtitleEl.textContent = companySubtitle;
-        if (loaderBrandEl) loaderBrandEl.textContent = companyName;
-        if (logoEl) {
-            logoEl.src = logoData;
-            logoEl.alt = `${companyName} logo`;
-        }
-        document.title = `${companyName} | ${companySubtitle}`;
-    },
-};
-
-const AppSettingsManager = {
-    init() {
-        const fileInput = document.getElementById('settingsCompanyLogoFile');
-        if (fileInput && !fileInput.dataset.bound) {
-            fileInput.addEventListener('change', (event) => this.handleLogoFile(event));
-            fileInput.dataset.bound = 'true';
-        }
-        this.apply();
-    },
-
-    apply() {
-        Branding.apply();
-        this.applyOperationalDefaults();
-        this.syncPreview();
-    },
-
-    applyOperationalDefaults() {
-        const taxInputs = ['lpoTaxRateInput', 'lpoTaxRateInputM'];
-        taxInputs.forEach((id) => {
-            const input = document.getElementById(id);
-            if (input) input.value = String(getDefaultTaxRate());
-        });
-
-        if (!AppState.hasActiveProject && !hasProjectIdentity()) {
-            AppState.current.id = generateProjectId();
-            const projectIdInput = document.getElementById('projectId');
-            if (projectIdInput) projectIdInput.value = AppState.current.id;
-        }
-
-        if (!String(AppState.current?.sales || '').trim()) {
-            AppState.current.sales = getDefaultSalesName();
-            const salesInput = document.getElementById('salesInput');
-            if (salesInput && !salesInput.value.trim()) salesInput.value = AppState.current.sales;
-        }
-    },
-
-    fillForm() {
-        const settings = getRawAppSettings();
-        const setValue = (id, value) => {
-            const input = document.getElementById(id);
-            if (input) input.value = value;
-        };
-        setValue('settingsCompanyName', settings.companyName);
-        setValue('settingsCompanySubtitle', settings.companySubtitle);
-        setValue('settingsProjectCodePrefix', settings.projectCodePrefix);
-        setValue('settingsDefaultSalesName', settings.defaultSalesName);
-        setValue('settingsDefaultTaxRate', settings.defaultTaxRate);
-        setValue('settingsDashboardDelayDays', settings.dashboardDelayDays);
-        AppState.appSettingsDraftLogoData = settings.companyLogoData || '';
-        const fileInput = document.getElementById('settingsCompanyLogoFile');
-        if (fileInput) fileInput.value = '';
-        this.syncPreview();
-    },
-
-    syncPreview() {
-        const wrap = document.getElementById('settingsLogoPreviewWrap');
-        const img = document.getElementById('settingsLogoPreview');
-        if (!wrap || !img) return;
-        const logoData = AppState.appSettingsDraftLogoData || getCompanyLogoData();
-        if (!logoData) {
-            wrap.hidden = true;
-            img.removeAttribute('src');
-            return;
-        }
-        wrap.hidden = false;
-        img.src = logoData;
-    },
-
-    async handleLogoFile(event) {
-        const file = event.target?.files?.[0];
-        if (!file) return;
-        if (!String(file.type || '').startsWith('image/')) {
-            Toast.show('الملف المختار ليس صورة', 'error');
-            event.target.value = '';
-            return;
-        }
-        if (file.size > 300 * 1024) {
-            Toast.show('حجم الشعار كبير. استخدم صورة أقل من 300 كيلوبايت.', 'error');
-            event.target.value = '';
-            return;
-        }
-        try {
-            AppState.appSettingsDraftLogoData = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(String(reader.result || ''));
-                reader.onerror = () => reject(new Error('تعذر قراءة ملف الشعار'));
-                reader.readAsDataURL(file);
-            });
-            this.syncPreview();
-        } catch (error) {
-            Toast.show(error.message || 'تعذر قراءة ملف الشعار', 'error');
-            event.target.value = '';
-        }
-    },
-
-    removeLogo() {
-        AppState.appSettingsDraftLogoData = '';
-        const fileInput = document.getElementById('settingsCompanyLogoFile');
-        if (fileInput) fileInput.value = '';
-        this.syncPreview();
-    },
-
-    collectFormValues() {
-        return normaliseAppSettings({
-            companyName: document.getElementById('settingsCompanyName')?.value,
-            companySubtitle: document.getElementById('settingsCompanySubtitle')?.value,
-            projectCodePrefix: document.getElementById('settingsProjectCodePrefix')?.value,
-            defaultSalesName: document.getElementById('settingsDefaultSalesName')?.value,
-            defaultTaxRate: document.getElementById('settingsDefaultTaxRate')?.value,
-            dashboardDelayDays: document.getElementById('settingsDashboardDelayDays')?.value,
-            companyLogoData: AppState.appSettingsDraftLogoData,
-        });
-    },
-
-    async save() {
-        const settings = this.collectFormValues();
-        if (settings.projectCodePrefix.length !== 3) {
-            Toast.show('بادئة كود المشروع يجب أن تكون 3 أحرف أو أرقام', 'error');
-            return;
-        }
-        await DB.saveAppSettings(settings);
-        this.fillForm();
-        this.apply();
-        await writeActivityLog('app_settings_updated', 'appSettings', 'global', 'تم تحديث إعدادات التطبيق العامة', {
-            companyName: settings.companyName,
-            projectCodePrefix: settings.projectCodePrefix,
-            defaultTaxRate: settings.defaultTaxRate,
-            dashboardDelayDays: settings.dashboardDelayDays,
-        });
-        Toast.show('تم حفظ إعدادات التطبيق');
-    },
-};
-
 const UserAccess = {
     apply() {
         const profile = AppState.currentUserProfile || {};
@@ -3332,7 +3057,7 @@ const UserAccess = {
 
         if (userName) userName.textContent = profile.displayName || profile.email || 'مستخدم';
         if (userRole) userRole.textContent = ROLE_LABELS[profile.role] || 'مستخدم';
-        if (adminBtn) adminBtn.hidden = !canOpenAdminPanel();
+        if (adminBtn) adminBtn.hidden = !permissions.canManageUsers;
         if (activityBtn) activityBtn.hidden = !permissions.canViewActivityLogs;
 
         document.querySelectorAll('[data-financial]').forEach((el) => {
@@ -3360,7 +3085,6 @@ const UserAccess = {
         if (!permissions.canEditProjects) {
             document.querySelectorAll('input, textarea, select').forEach((input) => {
                 if (input.id === 'projectsSearchInput') return;
-                if (input.closest('#adminPanelModal') || input.closest('#profilePanelModal') || input.closest('#activityLogModal')) return;
                 input.disabled = true;
                 if (['text', 'number', 'date', 'url'].includes(input.type)) input.readOnly = true;
             });
@@ -3483,7 +3207,6 @@ const ActivityLogPanel = {
             design_deleted: 'حذف تصميم',
             user_access_updated: 'تحديث صلاحيات مستخدم',
             user_profile_updated: 'تحديث بيانات مستخدم',
-            app_settings_updated: 'تحديث إعدادات التطبيق',
             workflow_updated: 'تحديث سير العمل',
         };
         return labels[log.action] || log.action || 'نشاط';
@@ -3506,20 +3229,15 @@ const AdminPanel = {
     },
 
     async render() {
-        const canManageUsers = hasPermission('canManageUsers');
-        const canManageAppSettings = hasPermission('canManageAppSettings');
-        const users = canManageUsers ? await this.loadUsers() : [];
+        const users = await this.loadUsers();
         const summary = document.getElementById('adminSummary');
         const list = document.getElementById('adminUsersList');
-        const settingsCard = document.getElementById('adminSettingsCard');
-        const saveSettingsBtn = document.getElementById('saveAppSettingsBtn');
 
         if (summary) {
             const cards = [
-                { label: 'إجمالي المستخدمين', value: canManageUsers ? users.length : '---' },
-                { label: 'المشاهدون', value: canManageUsers ? users.filter((user) => user.role === 'viewer').length : '---' },
-                { label: 'الإداريون', value: canManageUsers ? users.filter((user) => ['admin', 'super_admin'].includes(user.role)).length : '---' },
-                { label: 'كود المشروع', value: getProjectCodePrefix() },
+                { label: 'إجمالي المستخدمين', value: users.length },
+                { label: 'المشاهدون', value: users.filter((user) => user.role === 'viewer').length },
+                { label: 'الإداريون', value: users.filter((user) => ['admin', 'super_admin'].includes(user.role)).length },
             ];
             summary.innerHTML = cards.map((item) => `
                 <div class="admin-summary__card">
@@ -3529,14 +3247,8 @@ const AdminPanel = {
             `).join('');
         }
 
-        if (settingsCard) settingsCard.hidden = !canManageAppSettings;
-        if (saveSettingsBtn) saveSettingsBtn.hidden = !canManageAppSettings;
-        if (canManageAppSettings) AppSettingsManager.fillForm();
-
         if (!list) return;
-        list.innerHTML = canManageUsers
-            ? users.map((user) => this.renderUserCard(user)).join('')
-            : '<div class="admin-summary__card">لا تملك صلاحية إدارة المستخدمين، ويمكنك هنا فقط تعديل إعدادات التطبيق العامة.</div>';
+        list.innerHTML = users.map((user) => this.renderUserCard(user)).join('');
     },
 
     renderUserCard(user) {
@@ -3553,7 +3265,6 @@ const AdminPanel = {
             ['canExportProjects', 'تصدير وطباعة'],
             ['canManageDesigns', 'إدارة الصور'],
             ['canManageUsers', 'إدارة المستخدمين'],
-            ['canManageAppSettings', 'إدارة إعدادات التطبيق'],
             ['canViewActivityLogs', 'عرض سجل النشاطات'],
         ];
 
@@ -3742,7 +3453,6 @@ async function init() {
         await AuthSession.ensureAuthenticated();
         PageLoader.show('نسحب البيانات ونجهز المشاريع.');
         await DB.init();
-        AppSettingsManager.init();
 
         PageLoader.show('نرتب الواجهة لتظهر كاملة وجاهزة.');
         document.addEventListener('click', handleAction);

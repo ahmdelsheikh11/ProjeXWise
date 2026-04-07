@@ -144,6 +144,10 @@ const AppState = {
     hasActiveProject: false,
 };
 
+function hasProjectIdentity(project = AppState.current) {
+    return !!String(project?.name || '').trim();
+}
+
 // â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
 // 3. UTILITY HELPERS
 // â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
@@ -1501,19 +1505,21 @@ const ReportGenerator = {
 const Project = {
     createNew() {
         AppState.current = createEmptyProject();
-        AppState.hasActiveProject = true;
+        AppState.hasActiveProject = false;
         Renderer.renderAll(AppState.current);
         DisplayRenderer.renderAll(AppState.current);
         updateProjectWorkspaceVisibility();
         Designs.render();
-        Toast.show('مشروع جديد جاهز');
+        EntryModal.open('project');
+        Toast.show('أدخل اسم المشروع أولاً ثم احفظه');
     },
 
     async save() {
         this.collectFormData();
 
-        if (!AppState.current.client.trim()) {
-            Toast.show('يجب إدخال اسم العميل', 'error');
+        if (!hasProjectIdentity()) {
+            document.getElementById('projectNameInput')?.focus();
+            Toast.show('يجب إدخال اسم المشروع على الأقل', 'error');
             return;
         }
 
@@ -1524,11 +1530,14 @@ const Project = {
 
         try {
             await DB.saveProject(AppState.current);
+            AppState.hasActiveProject = true;
             Toast.show(`تم حفظ المشروع: ${AppState.current.id}`);
             // Re-render KPIs and items (safe â€” no workflow checkboxes reset here)
             Renderer.renderKPIs(AppState.current);
             Renderer.renderItemsLists(AppState.current);
             Renderer.renderWorkflow(AppState.current);
+            DisplayRenderer.renderAll(AppState.current);
+            updateProjectWorkspaceVisibility();
         } catch (err) {
             Toast.show('خطأ في الحفظ: ' + err.message, 'error');
         }
@@ -1651,7 +1660,7 @@ const Project = {
     import(jsonString) {
         try {
             const project = JSON.parse(jsonString);
-            if (!project.id || !project.client) return false;
+            if (!project.id || !(project.client || project.name)) return false;
             AppState.current = normaliseProject(project);
             AppState.hasActiveProject = true;
             Renderer.renderAll(AppState.current);
@@ -2387,6 +2396,7 @@ async function handleAction(e) {
         'delete-project': 'canDeleteProjects',
         'delete-all': 'canDeleteProjects',
         'open-entry-modal': 'canEditProjects',
+        'toggle-header-menu': 'canViewProjects',
         'add-spec-note': 'canEditProjects',
         'edit-spec-note': 'canEditProjects',
         'confirm-edit-note': 'canEditProjects',
@@ -2417,6 +2427,9 @@ async function handleAction(e) {
         Toast.show('هذا الإجراء متاح للمالك فقط', 'error');
         return;
     }
+    if (action !== 'toggle-header-menu' && target.closest('.header__extras')) {
+        MobileHeader.close();
+    }
 
     switch (action) {
 
@@ -2427,6 +2440,9 @@ async function handleAction(e) {
             if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             break;
         }
+        case 'toggle-header-menu':
+            MobileHeader.toggle();
+            break;
 
         // â”€â”€ Project CRUD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         case 'new-project':    Project.createNew(); break;
@@ -2894,7 +2910,7 @@ function setupAutoSave() {
 // â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
 
 function setupFieldValidation() {
-    ['clientInput', 'phoneInput'].forEach(id => {
+    ['projectNameInput'].forEach(id => {
         const field = document.getElementById(id);
         if (!field) return;
 
@@ -3442,6 +3458,7 @@ async function init() {
         document.addEventListener('click', handleAction);
         setupLiveListeners();
         setupFieldValidation();
+        MobileHeader.init();
         Renderer.renderLPOStages();
         Renderer.renderUnitsSelect();
         Renderer.renderAll(AppState.current);
@@ -3546,7 +3563,10 @@ const EntryModal = {
 
         // subtitle
         const sub = document.getElementById('entryModalSubtitle');
-        if (sub) sub.textContent = p.client ? `مشروع: ${p.client} — ${p.id}` : 'مشروع جديد';
+        if (sub) {
+            const projectLabel = p.name || p.client;
+            sub.textContent = projectLabel ? `مشروع: ${projectLabel} — ${p.id}` : 'مشروع جديد';
+        }
 
         const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
 
@@ -3608,9 +3628,9 @@ const EntryModal = {
     async saveAndClose() {
         this._collectFields();
 
-        if (!AppState.current.client.trim()) {
-            document.getElementById('clientInput')?.focus();
-            Toast.show('اسم العميل مطلوب', 'error');
+        if (!hasProjectIdentity()) {
+            document.getElementById('projectNameInput')?.focus();
+            Toast.show('اسم المشروع مطلوب', 'error');
             return;
         }
 
@@ -3621,8 +3641,10 @@ const EntryModal = {
 
         try {
             await DB.saveProject(AppState.current);
+            AppState.hasActiveProject = true;
             Renderer.renderAll(AppState.current);
             DisplayRenderer.renderAll(AppState.current);
+            updateProjectWorkspaceVisibility();
             Designs.render();
             Toast.show('تم حفظ بيانات المشروع ✓', 'success');
             this.close();
@@ -3761,6 +3783,39 @@ const EntryModal = {
         sync('lpoSupplierInputM',  'lpoSupplierInput');
         sync('lpoTaxRateInputM',   'lpoTaxRateInput');
         syncChk('lpoTaxInputM',    'lpoTaxInput');
+    },
+};
+
+const MobileHeader = {
+    init() {
+        const media = window.matchMedia('(max-width: 640px)');
+        const sync = () => {
+            if (!media.matches) this.close();
+        };
+
+        if (typeof media.addEventListener === 'function') {
+            media.addEventListener('change', sync);
+        } else if (typeof media.addListener === 'function') {
+            media.addListener(sync);
+        }
+
+        document.addEventListener('click', (event) => {
+            if (!media.matches) return;
+            const header = document.querySelector('.app-header');
+            if (!header?.classList.contains('is-mobile-menu-open')) return;
+            if (event.target.closest('.header__mobile-toggle, .header__extras')) return;
+            header.classList.remove('is-mobile-menu-open');
+        });
+    },
+
+    toggle() {
+        const header = document.querySelector('.app-header');
+        if (!header || window.innerWidth > 640) return;
+        header.classList.toggle('is-mobile-menu-open');
+    },
+
+    close() {
+        document.querySelector('.app-header')?.classList.remove('is-mobile-menu-open');
     },
 };
 

@@ -1,14 +1,14 @@
 ﻿/**
- * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
- * KITCHEN PROJECT MANAGER â€” app.js v2.0
+ * ===============================================================
+ * KITCHEN PROJECT MANAGER - app.js v2.0
  * Refactored: modular, clean, ES6+, no global pollution
  * Architecture: Config â†’ State â†’ Utils â†’ DB â†’ UI Modules â†’ Events â†’ Init
- * â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+ * ===============================================================
  */
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 1. CONFIGURATION (frozen, single source of truth)
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 const CONFIG = Object.freeze({
     DB_NAME:    'KitchenProjectsDB',
     DB_VERSION: 3,
@@ -82,9 +82,9 @@ const CONFIG = Object.freeze({
 // Flat list of workflow step keys for iteration
 const WORKFLOW_STEP_KEYS = CONFIG.WORKFLOW_STEPS.map(s => s.key);
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 2. APPLICATION STATE
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 /** Creates a fresh empty project object */
 function createEmptyProject() {
@@ -139,9 +139,9 @@ const AppState = {
     db:      null,
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 3. UTILITY HELPERS
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 /** Returns today as YYYY-MM-DD */
 function todayString() {
@@ -188,7 +188,7 @@ function getDefaultPaintColor() {
     return AppState.current.specifications.doorColor || '';
 }
 
-// â”€â”€â”€ Financial calculations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Financial calculations ----------------------------------
 
 /** Calculates the total cost of one stage's items (materials + paint) */
 function calcStageTotal(items) {
@@ -206,7 +206,7 @@ function calcMaterialsTotal(project) {
     );
 }
 
-// â”€â”€â”€ Workflow helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Workflow helpers ----------------------------------------
 
 /** Returns progress (0â€“100) based on completed workflow steps */
 function calculateProjectProgress(project) {
@@ -312,9 +312,9 @@ function normaliseProject(project) {
     return project;
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 4. INDEXEDDB STORAGE LAYER
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const DB = {
     /** Opens (or creates) the database */
@@ -357,7 +357,7 @@ const DB = {
         });
     },
 
-    // â”€â”€ Projects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Projects --------------------------------------------
 
     saveProject(project) {
         return this._request(CONFIG.STORES.PROJECTS, 'readwrite', s => s.put(project));
@@ -381,7 +381,7 @@ const DB = {
         return this._request(CONFIG.STORES.PROJECTS, 'readwrite', s => s.clear());
     },
 
-    // â”€â”€ Materials (autocomplete cache) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Materials (autocomplete cache) -----------------------
 
     saveMaterial(name, price) {
         const record = { name, price, lastUsed: new Date().toISOString() };
@@ -397,7 +397,7 @@ const DB = {
             .slice(0, 10);
     },
 
-    // â”€â”€ Designs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Designs ---------------------------------------------
 
     saveDesign(imageData) {
         const design = { data: imageData, projectId: AppState.current.id, uploadedAt: new Date().toISOString() };
@@ -419,9 +419,9 @@ const DB = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 5. TOAST NOTIFICATIONS
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Toast = {
     _container: null,
@@ -453,9 +453,9 @@ const Toast = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 6. CONFIRM DIALOG
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Confirm = {
     show(message, title = 'تأكيد') {
@@ -484,9 +484,9 @@ const Confirm = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 7. MODAL MANAGER
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Modal = {
     open(id) {
@@ -497,9 +497,9 @@ const Modal = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 9. AUTOCOMPLETE
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Autocomplete = {
     active:        false,
@@ -581,9 +581,9 @@ const Autocomplete = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 10. SPECS NOTES
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const SpecsNotes = {
     _editingIndex: -1,
@@ -667,7 +667,7 @@ const SpecsNotes = {
             }
             return `
                 <div class="note-item">
-                    <span class="note-item__bullet">â€¢</span>
+                    <span class="note-item__bullet">📌</span>
                     <span class="note-item__text">${escapeHtml(note)}</span>
                     <button class="btn btn--ghost btn--icon btn--xs" data-action="edit-spec-note" data-index="${idx}" title="تعديل" aria-label="تعديل الملاحظة">
                         <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
@@ -680,9 +680,9 @@ const SpecsNotes = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 11. ITEMS (MATERIALS) MANAGEMENT
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Items = {
     _editTarget: null, // { stage, index } while editing
@@ -812,9 +812,9 @@ const Items = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 12. DESIGNS GALLERY
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Designs = {
     async upload() {
@@ -891,9 +891,9 @@ const Designs = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 13. LPO (LOCAL PURCHASE ORDER)
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const LPO = {
     /** Builds an LPO HTML string from an items array */
@@ -904,8 +904,8 @@ const LPO = {
             const total  = line + paint;
             const stageCol = item.stageLabel ? `<td>${escapeHtml(item.stageLabel)}</td>` : '';
             const paintCols = hasPaint ? `
-                <td>${item.needsPaint ? formatNumber(item.paintCostPerUnit || 0) : 'â€”'}</td>
-                <td>${item.needsPaint ? escapeHtml(item.paintColor || '') : 'â€”'}</td>
+                <td>${item.needsPaint ? formatNumber(item.paintCostPerUnit || 0) : '-'}</td>
+                <td>${item.needsPaint ? escapeHtml(item.paintColor || '') : '-'}</td>
             ` : '';
             return `
                 <tr>
@@ -981,7 +981,7 @@ const LPO = {
     },
 
     generateFull() {
-        const supplier   = document.getElementById('lpoSupplierInput').value.trim() || 'â€”';
+        const supplier   = document.getElementById('lpoSupplierInput').value.trim() || '-';
         const includeTax = document.getElementById('lpoTaxInput').checked;
         const taxRate    = parseFloat(document.getElementById('lpoTaxRateInput').value) || CONFIG.DEFAULT_TAX_RATE;
 
@@ -1025,9 +1025,9 @@ const LPO = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 14. REPORT GENERATOR
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const ReportGenerator = {
     _baseStyles() {
@@ -1159,7 +1159,7 @@ const ReportGenerator = {
     },
 
     async generateFullReport(project, includeDesigns = false) {
-        const logoData = null; // Logo is hardcoded in HTML â€” no dynamic loading needed
+        const logoData = null; // Logo is hardcoded in HTML - no dynamic loading needed
         const designs  = includeDesigns ? await DB.getDesignsForProject(project.id) : [];
 
         const designSection = (designs.length > 0) ? `
@@ -1171,7 +1171,7 @@ const ReportGenerator = {
             <div class="report-header">
                 ${logoData ? `<img src="${logoData}" alt="شعار الشركة">` : ''}
                 <h1>تقرير مشروع: ${escapeHtml(project.client)} - ${escapeHtml(project.name || '')}</h1>
-                <div class="subtitle">${escapeHtml(project.id)} â€” ${formatDate(project.date)}</div>
+                <div class="subtitle">${escapeHtml(project.id)} - ${formatDate(project.date)}</div>
             </div>
             ${this._projectInfoSection(project)}
             ${this._specsSection(project)}
@@ -1183,7 +1183,7 @@ const ReportGenerator = {
     },
 
     async generateSpecsOnlyReport(project, includeDesigns = false) {
-        const logoData = null; // Logo is hardcoded in HTML â€” no dynamic loading needed
+        const logoData = null; // Logo is hardcoded in HTML - no dynamic loading needed
         const designs  = includeDesigns ? await DB.getDesignsForProject(project.id) : [];
 
         const designSection = (designs.length > 0) ? `
@@ -1207,7 +1207,7 @@ const ReportGenerator = {
     },
 
     async generateProjectsReport(projects) {
-        const logoData = null; // Logo is hardcoded in HTML â€” no dynamic loading needed
+        const logoData = null; // Logo is hardcoded in HTML - no dynamic loading needed
         const sorted   = [...projects].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
         const rows = sorted.map((p, idx) => {
@@ -1260,9 +1260,9 @@ const ReportGenerator = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 15. PROJECT MANAGEMENT
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Project = {
     createNew() {
@@ -1288,7 +1288,7 @@ const Project = {
         try {
             await DB.saveProject(AppState.current);
             Toast.show(`تم حفظ المشروع: ${AppState.current.id}`);
-            // Re-render KPIs and items (safe â€” no workflow checkboxes reset here)
+            // Re-render KPIs and items (safe - no workflow checkboxes reset here)
             Renderer.renderKPIs(AppState.current);
             Renderer.renderItemsLists(AppState.current);
             Renderer.renderWorkflow(AppState.current);
@@ -1423,9 +1423,9 @@ const Project = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
-// 16. RENDERER â€” Updates DOM from state
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
+// 16. RENDERER - Updates DOM from state
+// ===============================================================
 
 const Renderer = {
     renderAll(project) {
@@ -1479,8 +1479,8 @@ const Renderer = {
                 const paint = item.needsPaint ? item.qty * (item.paintCostPerUnit || 0) : 0;
                 const total = line + paint;
                 const paintCols = hasPaint ? `
-                    <td>${item.needsPaint ? formatNumber(item.paintCostPerUnit || 0) : 'â€”'}</td>
-                    <td>${item.needsPaint ? escapeHtml(item.paintColor || '') : 'â€”'}</td>` : '';
+                    <td>${item.needsPaint ? formatNumber(item.paintCostPerUnit || 0) : '-'}</td>
+                    <td>${item.needsPaint ? escapeHtml(item.paintColor || '') : '-'}</td>` : '';
                 return `
                     <tr>
                         <td>${idx + 1}</td>
@@ -1570,15 +1570,15 @@ const Renderer = {
         }
         list.innerHTML = projects.map(p => {
             const isDone = !!p.workflow?.handover_signed;
-            const stageLabel = STAGE_LABELS[p.currentStage] || p.currentStage || 'â€”';
+            const stageLabel = STAGE_LABELS[p.currentStage] || p.currentStage || '-';
             return `
                 <div class="project-card" data-action="open-project" data-project-id="${p.id}">
                     <div class="project-card__info">
                         <div class="project-card__id">${escapeHtml(p.id)}</div>
-                        <div class="project-card__client">${escapeHtml(p.client || 'â€”')}${p.name ? ` <span style="color:var(--clr-ink-ghost);font-weight:400;">â€” ${escapeHtml(p.name)}</span>` : ''}</div>
+                        <div class="project-card__client">${escapeHtml(p.client || '-')}${p.name ? ` <span style="color:var(--clr-ink-ghost);font-weight:400;">- ${escapeHtml(p.name)}</span>` : ''}</div>
                         <div class="project-card__meta">
-                            ${p.phone   ? `<span class="project-card__meta-item">ًں“‍ ${escapeHtml(p.phone)}</span>` : ''}
-                            ${p.emirate ? `<span class="project-card__meta-item">ًں“چ ${escapeHtml(p.emirate)}</span>` : ''}
+                            ${p.phone   ? `<span class="project-card__meta-item">📞 ${escapeHtml(p.phone)}</span>` : ''}
+                            ${p.emirate ? `<span class="project-card__meta-item">📍 ${escapeHtml(p.emirate)}</span>` : ''}
                             <span class="project-card__meta-item">ًں“… ${formatDate(p.date)}</span>
                             <span class="project-status-badge project-status-badge--${isDone ? 'done' : 'active'}">${isDone ? 'مسلّم' : stageLabel}</span>
                         </div>
@@ -1650,9 +1650,9 @@ const Renderer = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 17. PRODUCTION BOARD
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const STAGE_LABELS = {
     pre_sales:'ما قبل البيع', measurement:'المعاينة', contract:'التعاقد', design:'التصميم',
@@ -1691,7 +1691,7 @@ const ProductionBoard = {
             const cardsHtml = cards.map(p => {
                 const contractDate = p.dates?.contractDate || p.date || todayString();
                 const daysSince    = Math.floor((Date.now() - new Date(contractDate)) / 86400000);
-                let daysRemaining  = 'â€”';
+                let daysRemaining  = '-';
                 let deadlineClass  = '';
                 if (p.dates?.deliveryDate) {
                     const rem     = Math.floor((new Date(p.dates.deliveryDate) - Date.now()) / 86400000);
@@ -1700,9 +1700,9 @@ const ProductionBoard = {
                 }
                 return `
                     <div class="board-card" data-project-id="${p.id}" data-action="open-project-from-board">
-                        <strong>${escapeHtml(p.client || 'â€”')}</strong>
+                        <strong>${escapeHtml(p.client || '-')}</strong>
                         ${p.name    ? `<div style="font-size:var(--text-xs);color:var(--clr-ink-tertiary);margin-bottom:2px;">${escapeHtml(p.name)}</div>` : ''}
-                        ${p.emirate ? `<div style="font-size:var(--text-xs);color:var(--clr-ink-ghost);">ًں“چ ${escapeHtml(p.emirate)}</div>` : ''}
+                        ${p.emirate ? `<div style="font-size:var(--text-xs);color:var(--clr-ink-ghost);">📍 ${escapeHtml(p.emirate)}</div>` : ''}
                         <div class="progress-bar" style="margin-top:8px;">
                             <div class="progress-fill" style="width:${p.progress || 0}%"></div>
                         </div>
@@ -1731,9 +1731,9 @@ const ProductionBoard = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 18. DASHBOARD
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Dashboard = {
     async render() {
@@ -1953,9 +1953,9 @@ const Dashboard = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 19. PRINT FUNCTIONS
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 /** Opens a print window with the given HTML content */
 function openPrintWindow(html) {
@@ -2030,9 +2030,9 @@ async function printDashboard() {
     win.print();
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 20. CLIPBOARD
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 async function copyToClipboard(text) {
     try {
@@ -2051,9 +2051,9 @@ async function copyToClipboard(text) {
     }
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 21. VIEW SWITCHER
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 function setupViewSwitcher() {
     const views = {
@@ -2064,7 +2064,7 @@ function setupViewSwitcher() {
 
     const buttons = document.querySelectorAll('[data-view]');
 
-    // Activate a view by key â€” always fetches fresh data from DB
+    // Activate a view by key - always fetches fresh data from DB
     async function activateView(viewKey) {
         // Show/hide views
         Object.entries(views).forEach(([key, id]) => {
@@ -2099,9 +2099,9 @@ function setupViewSwitcher() {
     buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.view === 'project'));
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 22. EVENT DELEGATION (all click-based actions)
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 async function handleAction(e) {
     const target = e.target.closest('[data-action]');
@@ -2111,7 +2111,7 @@ async function handleAction(e) {
 
     switch (action) {
 
-        // â”€â”€ Theme toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Theme toggle ---------------------------------------
         case 'toggle-theme': Theme.toggle(); break;
         case 'scroll-to-section': {
             const section = document.getElementById(target.dataset.target || '');
@@ -2119,7 +2119,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Project CRUD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Project CRUD ---------------------------------------
         case 'new-project':    Project.createNew(); break;
         case 'save-project':   Project.save(); break;
         case 'clear-project':  Project.createNew(); break;
@@ -2137,7 +2137,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ External links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- External links -------------------------------------
         case 'open-whatsapp': {
             const phone = document.getElementById('phoneInput').value.trim();
             if (!phone) { Toast.show('يجب إدخال رقم التليفون أولاً', 'error'); break; }
@@ -2152,36 +2152,36 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Specs notes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Specs notes ----------------------------------------
         case 'add-spec-note':     SpecsNotes.add(); break;
         case 'edit-spec-note':    SpecsNotes.startEdit(parseInt(target.dataset.index, 10)); break;
         case 'confirm-edit-note': SpecsNotes.confirmEdit(parseInt(target.dataset.index, 10)); break;
         case 'cancel-edit-note':  SpecsNotes.cancelEdit(); break;
         case 'delete-spec-note':  SpecsNotes.delete(parseInt(target.dataset.index, 10)); break;
 
-        // â”€â”€ Materials â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Materials ------------------------------------------
         case 'add-item':        Items.add(); break;
         case 'edit-item-modal': Items.openEditModal(target.dataset.stage, parseInt(target.dataset.index, 10)); break;
         case 'delete-item':     Items.delete(target.dataset.stage, parseInt(target.dataset.index, 10)); break;
         case 'update-item':     Items.update(); break;
 
-        // â”€â”€ LPO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- LPO ------------------------------------------------
         case 'generate-lpo':      LPO.generate(); break;
         case 'generate-full-lpo': LPO.generateFull(); break;
         case 'print-lpo':         LPO.print(); break;
 
-        // â”€â”€ Print â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Print ----------------------------------------------
         case 'print-full-report':        printFullReport(); break;
         case 'print-specs-only':         printSpecsOnly(); break;
         case 'print-specs-with-designs': printSpecsWithDesigns(); break;
         case 'print-dashboard':          printDashboard(); break;
 
-        // â”€â”€ Designs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Designs --------------------------------------------
         case 'upload-designs':       Designs.upload(); break;
         case 'delete-design':        Designs.delete(parseInt(target.dataset.designId, 10)); break;
         case 'clear-designs-upload': Designs.clearUpload(); break;
 
-        // â”€â”€ Projects modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Projects modal -------------------------------------
         case 'open-projects-modal': {
             const projects = await DB.loadProjects();
             await Renderer.renderProjectsList(projects);
@@ -2211,7 +2211,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Import â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Import ---------------------------------------------
         case 'import-project': Modal.open('importModal'); break;
 
         case 'import-project-file': {
@@ -2232,10 +2232,10 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Close modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Close modal ----------------------------------------
         case 'close-modal': Modal.closeAll(); break;
 
-        // â”€â”€ Workflow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Workflow -------------------------------------------
         case 'toggle-workflow': {
             const step = target.dataset.step;
             if (!step) break;
@@ -2259,7 +2259,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Open project from production board â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Open project from production board -----------------
         case 'open-project-from-board': {
             const card = target.closest('[data-project-id]');
             if (!card) break;
@@ -2270,7 +2270,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Sort board column â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Sort board column ----------------------------------
         case 'sort-column': {
             const stage   = target.dataset.stage;
             const sortBy  = target.dataset.sort;
@@ -2297,7 +2297,7 @@ async function handleAction(e) {
             break;
         }
 
-        // â”€â”€ Print all projects table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // -- Print all projects table ---------------------------
         case 'print-projects-table': {
             const projects = await DB.loadProjects();
             if (!projects.length) { Toast.show('لا توجد مشاريع للطباعة', 'error'); break; }
@@ -2308,12 +2308,12 @@ async function handleAction(e) {
     }
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 23. LIVE INPUT LISTENERS
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 function setupLiveListeners() {
-    // Financial inputs â€” update KPIs in real time
+    // Financial inputs - update KPIs in real time
     ['discountInput', 'paidInput', 'totalAmountInput'].forEach(id => {
         document.getElementById(id).addEventListener('input', () => {
             const snapshot = deepClone(AppState.current);
@@ -2365,7 +2365,7 @@ function setupLiveListeners() {
         if (item) Autocomplete.select(item);
     });
 
-    // Spec notes â€” add on Enter
+    // Spec notes - add on Enter
     document.getElementById('specsNotesInput').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); SpecsNotes.add(); }
     });
@@ -2395,7 +2395,7 @@ function setupLiveListeners() {
         document.getElementById('editPaintFields').style.display = e.target.checked ? 'block' : 'none';
     });
 
-    // Edit form â€” submit on Enter
+    // Edit form - submit on Enter
     document.getElementById('editItemForm').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') { e.preventDefault(); Items.update(); }
     });
@@ -2434,7 +2434,7 @@ function setupLiveListeners() {
         if (e.key === 'Escape') Modal.closeAll();
     });
 
-    // Inline note edit â€” Enter to confirm, Escape to cancel
+    // Inline note edit - Enter to confirm, Escape to cancel
     document.getElementById('specsNotesList').addEventListener('keydown', (e) => {
         const input = e.target.closest('[id^="noteEditInput-"]');
         if (!input) return;
@@ -2464,11 +2464,11 @@ function _setupDropZone(zoneId, onDrop) {
     });
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 24. AUTO-SAVE
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
-// â”€â”€ Auto-save indicator helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// -- Auto-save indicator helper ------------------------------
 const AutosaveUI = {
     _el:   null,
     _dot:  null,
@@ -2535,9 +2535,9 @@ function setupAutoSave() {
     });
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 25. REAL-TIME FIELD VALIDATION (visual feedback)
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 function setupFieldValidation() {
     ['clientInput', 'phoneInput'].forEach(id => {
@@ -2558,9 +2558,9 @@ function setupFieldValidation() {
     });
 }
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // THEME MANAGER
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const Theme = {
     _key: 'kpm-theme',
@@ -2578,7 +2578,7 @@ const Theme = {
         Toast.show(next === 'dark' ? 'الوضع الداكن' : 'الوضع الفاتح', 'info');
     },
 
-    /** Call once at startup â€” restores user's saved preference */
+    /** Call once at startup - restores user's saved preference */
     init() {
         const saved = localStorage.getItem(this._key);
         if (saved === 'light' || saved === 'dark') {
@@ -2591,9 +2591,9 @@ const Theme = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // 26. INITIALISATION
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 async function init() {
     try {
@@ -2642,7 +2642,7 @@ async function init() {
     }
 }
 
-// â”€â”€â”€ Boot â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Boot -----------------------------------------------------
 // Apply theme immediately to avoid flash of wrong theme on load
 (function() {
     const saved = localStorage.getItem('kpm-theme');
@@ -2658,7 +2658,7 @@ if (document.readyState === 'loading') {
     setTimeout(init, 80);
 }
 
-// â”€â”€â”€ Sticky actions bar shadow when scrolled â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Sticky actions bar shadow when scrolled ------------------
 // Uses IntersectionObserver to add .is-stuck when the bar leaves its natural position
 (function setupStickyBar() {
     const setup = () => {
@@ -2685,14 +2685,14 @@ if (document.readyState === 'loading') {
     }
 })();
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 // ENTRY MODAL — تبويبات رئيسية + فرعية لإدخال البيانات
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
 
 const EntryModal = {
     _open: false,
 
-    // â”€â”€ Open â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Open --------------------------------------------------
     open(ptab, stab) {
         this._populate();
         document.getElementById('entryModal').classList.add('open');
@@ -2716,7 +2716,7 @@ const EntryModal = {
         this._open = false;
     },
 
-    // â”€â”€ Populate modal fields from AppState â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Populate modal fields from AppState -------------------
     _populate() {
         const p = AppState.current;
         const s = p.specifications || {};
@@ -2782,7 +2782,7 @@ const EntryModal = {
         if (rate && rateM) rateM.value = rate.value;
     },
 
-    // â”€â”€ Collect & save â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Collect & save ----------------------------------------
     async saveAndClose() {
         this._collectFields();
 
@@ -2836,7 +2836,7 @@ const EntryModal = {
         };
     },
 
-    // â”€â”€ Live financial update â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Live financial update ---------------------------------
     _updateLive() {
         const total    = parseFloat(document.getElementById('totalAmountInput')?.value) || 0;
         const discount = parseFloat(document.getElementById('discountInput')?.value)    || 0;
@@ -2853,7 +2853,7 @@ const EntryModal = {
         if (rem) rem.style.color = remaining > 0 ? 'var(--clr-danger-text)' : remaining < 0 ? 'var(--clr-warning-text)' : 'var(--clr-success-text)';
     },
 
-    // â”€â”€ Tab switching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Tab switching -----------------------------------------
     switchPrimary(ptab) {
         document.querySelectorAll('.entry-ptab').forEach(b => {
             b.classList.toggle('active', b.dataset.ptab === ptab);
@@ -2883,7 +2883,7 @@ const EntryModal = {
         }
     },
 
-    // â”€â”€ Init â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // -- Init -------------------------------------------------
     init() {
         // Primary tab clicks
         document.querySelectorAll('.entry-ptab').forEach(btn => {
@@ -2942,9 +2942,9 @@ const EntryModal = {
     },
 };
 
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
-// DISPLAY RENDERER â€” renders read-only views on the main page
-// â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+// ===============================================================
+// DISPLAY RENDERER - renders read-only views on the main page
+// ===============================================================
 
 const DisplayRenderer = {
     renderAll(project) {
@@ -3103,7 +3103,7 @@ const DisplayRenderer = {
             if (notes.length) {
                 notesDisplay.innerHTML = `
                     <div class="notes-list">
-                        ${notes.map(n => `<div class="note-item"><span class="note-item__bullet">â€¢</span><span class="note-item__text">${escapeHtml(n)}</span></div>`).join('')}
+                        ${notes.map(n => `<div class="note-item"><span class="note-item__bullet">📌</span><span class="note-item__text">${escapeHtml(n)}</span></div>`).join('')}
                     </div>`;
             } else {
                 notesDisplay.innerHTML = '';
@@ -3128,7 +3128,7 @@ const DisplayRenderer = {
     },
 };
 
-// â”€â”€ Patch Designs to support dual gallery (main + modal) â”€â”€â”€â”€â”€â”€
+// -- Patch Designs to support dual gallery (main + modal) ------
 const _origDesignsRender = Designs.render.bind(Designs);
 Designs.render = async function() {
     await _origDesignsRender();
@@ -3157,14 +3157,14 @@ Designs.renderIn = async function(galleryId) {
     }
 };
 
-// â”€â”€ Patch Renderer.renderAll to also update display views â”€â”€â”€â”€â”€
+// -- Patch Renderer.renderAll to also update display views -----
 const _origRendererAll = Renderer.renderAll.bind(Renderer);
 Renderer.renderAll = function(project) {
     _origRendererAll(project);
     DisplayRenderer.renderAll(project);
 };
 
-// â”€â”€ Patch Project.loadById to open entry modal after load â”€â”€â”€â”€â”€
+// -- Patch Project.loadById to open entry modal after load -----
 const _origLoadById = Project.loadById.bind(Project);
 Project.loadById = async function(id) {
     const result = await _origLoadById(id);
@@ -3175,7 +3175,7 @@ Project.loadById = async function(id) {
     return result;
 };
 
-// â”€â”€ Boot EntryModal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// -- Boot EntryModal ------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         EntryModal.init();

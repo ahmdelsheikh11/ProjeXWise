@@ -6,11 +6,17 @@
     <title>نظام إدارة مشاريع مطابخ ألومينيوم</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="app-loading">
-    <div class="page-loader" id="pageLoader" aria-live="polite" aria-busy="true">
+    <div
+      class="page-loader"
+      id="pageLoader"
+      aria-live="polite"
+      aria-busy="true">
       <div class="page-loader__backdrop"></div>
       <div class="page-loader__card">
         <div class="page-loader__brand">ProjeXWise Kitchen</div>
@@ -20,194 +26,375 @@
           <span></span>
         </div>
         <h2 class="page-loader__title">نجهز لك مساحة الشغل</h2>
-        <p class="page-loader__text" id="pageLoaderText">نرتب البيانات والواجهة، وبعدها تظهر لك الصفحة كاملة وجاهزة.</p>
+        <p class="page-loader__text" id="pageLoaderText">
+          نرتب البيانات والواجهة، وبعدها تظهر لك الصفحة كاملة وجاهزة.
+        </p>
       </div>
     </div>
 
-    <!-- â”€â”€â”€ HEADER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- --- HEADER ------------------------------------------- -->
     <header class="app-header">
       <div class="header__brand">
-        <img class="header__logo visible"
+        <img
+          class="header__logo visible"
           src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTIwIDQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjMWEyZDUwIi8+PHRleHQgeD0iMTAiIHk9IjI2IiBmb250LWZhbWlseT0iSUJNIFBsZXggU2FucyBBcmFiaWMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzNkOGVmMCI+UHJvamVYV2lzZTwvdGV4dD48L3N2Zz4="
           alt="شعار الشركة" />
         <div class="header__title-wrap">
           <h1 class="header__title">ProjeXWise Kitchen</h1>
-          <span class="header__subtitle">نظام إدارة مشاريع مطابخ ألومينيوم</span>
+          <span class="header__subtitle"
+            >نظام إدارة مشاريع مطابخ ألومينيوم</span
+          >
         </div>
       </div>
       <nav class="header__nav view-switcher" aria-label="التنقل بين الصفحات">
         <button class="btn btn--nav" data-view="project">
-          <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          <svg class="btn__icon" viewBox="0 0 24 24">
+            <path
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z" />
+          </svg>
           المشاريع
         </button>
         <button class="btn btn--nav" data-view="board">
-          <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          <svg class="btn__icon" viewBox="0 0 24 24">
+            <path
+              d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+          </svg>
           الإنتاج
         </button>
         <button class="btn btn--nav" data-view="dashboard">
-          <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          <svg class="btn__icon" viewBox="0 0 24 24">
+            <path
+              d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+          </svg>
           القيادة
         </button>
       </nav>
-      <button class="btn btn--ghost btn--icon btn--sm header__mobile-toggle" type="button" data-action="toggle-header-menu" aria-label="فتح قائمة الأدوات">
-        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <button
+        class="btn btn--ghost btn--icon btn--sm header__mobile-toggle"
+        type="button"
+        data-action="toggle-header-menu"
+        aria-label="فتح قائمة الأدوات">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            fill="none" />
+        </svg>
       </button>
       <div class="header__extras">
         <div class="autosave-indicator" id="autosaveIndicator">
           <span class="autosave-dot"></span>
           <span id="autosaveText">جاهز</span>
         </div>
-        <button class="btn btn--ghost btn--sm" data-action="open-profile-panel">حسابي</button>
-        <button class="btn btn--ghost btn--sm app-admin-trigger" id="activityLogBtn" data-action="open-activity-log" hidden>سجل النشاطات</button>
-        <button class="btn btn--ghost btn--sm app-admin-trigger" id="adminPanelBtn" data-action="open-admin-panel" hidden>لوحة التحكم</button>
+        <button class="btn btn--ghost btn--sm" data-action="open-profile-panel">
+          حسابي
+        </button>
+        <button
+          class="btn btn--ghost btn--sm app-admin-trigger"
+          id="activityLogBtn"
+          data-action="open-activity-log"
+          hidden>
+          سجل النشاطات
+        </button>
+        <button
+          class="btn btn--ghost btn--sm app-admin-trigger"
+          id="adminPanelBtn"
+          data-action="open-admin-panel"
+          hidden>
+          لوحة التحكم
+        </button>
         <div class="user-chip" id="currentUserBadge">
           <span class="user-chip__name" id="currentUserName">...</span>
           <span class="user-chip__role" id="currentUserRole">...</span>
         </div>
-        <button class="btn btn--ghost btn--sm" data-action="logout">تسجيل الخروج</button>
-        <button class="btn btn--ghost btn--icon btn--sm" id="themeToggleBtn" data-action="toggle-theme" aria-label="تبديل الوضع">
-          <svg id="themeIconMoon" viewBox="0 0 24 24" style="display:none"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
-          <svg id="themeIconSun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        <button class="btn btn--ghost btn--sm" data-action="logout">
+          تسجيل الخروج
+        </button>
+        <button
+          class="btn btn--ghost btn--icon btn--sm"
+          id="themeToggleBtn"
+          data-action="toggle-theme"
+          aria-label="تبديل الوضع">
+          <svg id="themeIconMoon" viewBox="0 0 24 24" style="display: none">
+            <path
+              d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
+          </svg>
+          <svg id="themeIconSun" viewBox="0 0 24 24">
+            <path
+              d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              fill="none" />
+          </svg>
         </button>
       </div>
     </header>
 
-    <!-- â”€â”€â”€ MAIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- --- MAIN ----------------------------------------------- -->
     <main class="main-content">
       <div class="container">
-
-        <!-- â•گâ•گ PROJECT MANAGER VIEW â•گâ•گ -->
+        <!-- == PROJECT MANAGER VIEW == -->
         <div id="projectManagerView">
           <section class="project-empty-state card" id="projectEmptyState">
             <div class="project-empty-state__icon">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z" />
+              </svg>
             </div>
             <h2 class="project-empty-state__title">لا يوجد مشروع مفتوح الآن</h2>
-            <p class="project-empty-state__text">افتح مشروعًا موجودًا لمراجعته أو أنشئ مشروعًا جديدًا عندما تحتاج البدء بإدخال البيانات.</p>
+            <p class="project-empty-state__text">
+              افتح مشروعًا موجودًا لمراجعته أو أنشئ مشروعًا جديدًا عندما تحتاج
+              البدء بإدخال البيانات.
+            </p>
             <div class="project-empty-state__actions">
-              <button class="btn btn--primary" data-action="open-projects-modal">فتح مشروع</button>
-              <button class="btn btn--secondary" data-action="new-project">إنشاء مشروع جديد</button>
-            </div>
-          </section>
-
-          <section class="project-overview" id="projectOverview">
-            <div class="project-overview__hero">
-              <div class="project-overview__copy">
-                <span class="project-overview__eyebrow">Project Command Center</span>
-                <h2 class="project-overview__title" id="overviewProjectTitle">مشروع جديد</h2>
-                <p class="project-overview__subtitle" id="overviewProjectSubtitle">جهز البيانات الأساسية وابدأ تتبع التقدم والإنتاج والتسليم من مكان واحد.</p>
-                <div class="project-overview__meta" id="overviewMeta"><!-- rendered by JS --></div>
-              </div>
-              <div class="project-overview__spotlight" id="overviewSpotlight"><!-- rendered by JS --></div>
-            </div>
-            <div class="project-overview__stats" id="overviewStats"><!-- rendered by JS --></div>
-            <div class="project-overview__actions">
-              <div class="project-overview__quick-actions">
-                <button class="btn btn--primary btn--sm" data-action="open-entry-modal">
-                  <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                  تحديث البيانات
-                </button>
-                <button class="btn btn--secondary btn--sm" data-action="save-project">
-                  <svg class="btn__icon" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z"/></svg>
-                  حفظ سريع
-                </button>
-              </div>
-              <div class="project-overview__section-links">
-                <button class="overview-chip" data-action="scroll-to-section" data-target="workflowCard">سير العمل</button>
-                <button class="overview-chip" data-action="scroll-to-section" data-target="itemsCard">المواد</button>
-                <button class="overview-chip" data-action="scroll-to-section" data-target="financialsCard" data-financial>المالية</button>
-                <button class="overview-chip" data-action="scroll-to-section" data-target="lpoCard">LPO</button>
-              </div>
+              <button
+                class="btn btn--primary"
+                data-action="open-projects-modal">
+                فتح مشروع
+              </button>
+              <button class="btn btn--secondary" data-action="new-project">
+                إنشاء مشروع جديد
+              </button>
             </div>
           </section>
 
           <!-- Actions bar -->
           <div class="project-actions-bar">
             <div class="project-actions-bar__group">
-              <button class="btn btn--ghost btn--sm" data-action="open-projects-modal">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-projects-modal">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+                </svg>
                 المشاريع
               </button>
-              <button class="btn btn--ghost btn--sm" data-action="export-project">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="export-project">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z" />
+                </svg>
                 تصدير
               </button>
-              <button class="btn btn--ghost btn--sm" data-action="import-project">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 21H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h11l5 5v11c0 1.1-.9 2-2 2zm-7-3l7-7-1.41-1.41L13 14.17V10h-2v4.17l-2.59-2.58L7 13l5 5z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="import-project">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M19 21H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h11l5 5v11c0 1.1-.9 2-2 2zm-7-3l7-7-1.41-1.41L13 14.17V10h-2v4.17l-2.59-2.58L7 13l5 5z" />
+                </svg>
                 استيراد
               </button>
             </div>
             <div class="project-actions-bar__group">
-              <button class="btn btn--secondary btn--sm" data-action="new-project">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <button
+                class="btn btn--secondary btn--sm"
+                data-action="new-project">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                </svg>
                 مشروع جديد
               </button>
-              <button class="btn btn--primary btn--sm" data-action="open-entry-modal">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              <button
+                class="btn btn--primary btn--sm"
+                data-action="open-entry-modal">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
                 إدخال / تعديل البيانات
               </button>
-              <button class="btn btn--success btn--sm" data-action="save-project">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z"/></svg>
+              <button
+                class="btn btn--success btn--sm"
+                data-action="save-project">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z" />
+                </svg>
                 حفظ
               </button>
             </div>
           </div>
 
-          <!-- â”€â”€ 1. PROJECT INFO (display) â”€â”€ -->
+          <section class="project-overview" id="projectOverview">
+            <div class="project-overview__hero">
+              <div class="project-overview__copy">
+                <span class="project-overview__eyebrow"
+                  >Project Command Center</span
+                >
+                <h2 class="project-overview__title" id="overviewProjectTitle">
+                  مشروع جديد
+                </h2>
+                <p
+                  class="project-overview__subtitle"
+                  id="overviewProjectSubtitle">
+                  جهز البيانات الأساسية وابدأ تتبع التقدم والإنتاج والتسليم من
+                  مكان واحد.
+                </p>
+                <div class="project-overview__meta" id="overviewMeta">
+                  <!-- rendered by JS -->
+                </div>
+              </div>
+              <div class="project-overview__spotlight" id="overviewSpotlight">
+                <!-- rendered by JS -->
+              </div>
+            </div>
+            <div class="project-overview__stats" id="overviewStats">
+              <!-- rendered by JS -->
+            </div>
+            <div class="project-overview__actions">
+              <div class="project-overview__quick-actions">
+                <button
+                  class="btn btn--primary btn--sm"
+                  data-action="open-entry-modal">
+                  <svg class="btn__icon" viewBox="0 0 24 24">
+                    <path
+                      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                  تحديث البيانات
+                </button>
+                <button
+                  class="btn btn--secondary btn--sm"
+                  data-action="save-project">
+                  <svg class="btn__icon" viewBox="0 0 24 24">
+                    <path
+                      d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z" />
+                  </svg>
+                  حفظ سريع
+                </button>
+              </div>
+              <div class="project-overview__section-links">
+                <button
+                  class="overview-chip"
+                  data-action="scroll-to-section"
+                  data-target="workflowCard">
+                  سير العمل
+                </button>
+                <button
+                  class="overview-chip"
+                  data-action="scroll-to-section"
+                  data-target="itemsCard">
+                  المواد
+                </button>
+                <button
+                  class="overview-chip"
+                  data-action="scroll-to-section"
+                  data-target="financialsCard"
+                  data-financial>
+                  المالية
+                </button>
+                <button
+                  class="overview-chip"
+                  data-action="scroll-to-section"
+                  data-target="lpoCard">
+                  LPO
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- -- 1. PROJECT INFO (display) -- -->
           <section class="card view-card" id="projectInfoDisplay">
             <div class="card__header">
-              <div style="display:flex;align-items:center;gap:var(--sp-3);flex:1;min-width:0;flex-wrap:wrap;">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: var(--sp-3);
+                  flex: 1;
+                  min-width: 0;
+                  flex-wrap: wrap;
+                ">
                 <h2 class="card__title">
-                  <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <svg class="card__title-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
                   بيانات المشروع
                 </h2>
-                <code class="view-badge" id="displayProjectId">â€”</code>
+                <code class="view-badge" id="displayProjectId">-</code>
               </div>
-              <button class="btn btn--ghost btn--sm" data-action="open-entry-modal" data-tab="project">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-entry-modal"
+                data-tab="project">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
                 تعديل
               </button>
             </div>
-            <div class="view-info-grid" id="projectInfoGrid"><!-- rendered by JS --></div>
+            <div class="view-info-grid" id="projectInfoGrid">
+              <!-- rendered by JS -->
+            </div>
           </section>
 
-          <!-- â”€â”€ 2. SPECS (display) â”€â”€ -->
+          <!-- -- 2. SPECS (display) -- -->
           <section class="card view-card" id="specificationsDisplay">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" />
+                </svg>
                 مواصفات المطبخ
               </h2>
-              <button class="btn btn--ghost btn--sm" data-action="open-entry-modal" data-tab="specs">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-entry-modal"
+                data-tab="specs">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
                 تعديل
               </button>
             </div>
-            <div id="specificationsDisplayGrid" class="view-specs-grid"><!-- rendered by JS --></div>
+            <div id="specificationsDisplayGrid" class="view-specs-grid">
+              <!-- rendered by JS -->
+            </div>
             <!-- Notes display -->
             <div id="specsNotesDisplay" class="specs-notes-display"></div>
           </section>
 
-          <!-- â”€â”€ 3. Workflow â”€â”€ -->
+          <!-- -- 3. Workflow -- -->
           <section class="card" id="workflowCard">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
+                </svg>
                 مراحل العمل
               </h2>
             </div>
             <div class="card__body" id="workflowSteps"></div>
           </section>
 
-          <!-- â”€â”€ 4. Designs â”€â”€ -->
+          <!-- -- 4. Designs -- -->
           <section class="card" id="designsCard">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                </svg>
                 ألبوم التصاميم
               </h2>
-              <button class="btn btn--ghost btn--sm" data-action="open-entry-modal" data-tab="designs">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-entry-modal"
+                data-tab="designs">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                </svg>
                 رفع صور
               </button>
             </div>
@@ -216,47 +403,84 @@
             </div>
           </section>
 
-          <!-- â”€â”€ 5. Materials â”€â”€ -->
+          <!-- -- 5. Materials -- -->
           <section class="card" id="itemsCard">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                </svg>
                 المواد والكميات
               </h2>
-              <button class="btn btn--ghost btn--sm" data-action="open-entry-modal" data-tab="materials">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-entry-modal"
+                data-tab="materials">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                </svg>
                 إضافة مادة
               </button>
             </div>
             <div id="itemsLists" class="items-lists"></div>
           </section>
 
-          <!-- â”€â”€ 6. Financials (display) â”€â”€ -->
+          <!-- -- 6. Financials (display) -- -->
           <section class="card" id="financialsCard" data-financial>
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
+                </svg>
                 الإجماليات والمالية
               </h2>
-              <button class="btn btn--ghost btn--sm" data-action="open-entry-modal" data-tab="financials" data-financial>
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              <button
+                class="btn btn--ghost btn--sm"
+                data-action="open-entry-modal"
+                data-tab="financials"
+                data-financial>
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
                 تعديل
               </button>
             </div>
             <div class="kpi-grid" id="kpiGrid">
-              <div class="kpi-card"><span class="kpi-card__label">إجمالي المواد</span><span class="kpi-card__value" id="kpiMaterialsTotal">0.00</span></div>
-              <div class="kpi-card kpi-card--accent"><span class="kpi-card__label">الإجمالي بعد الخصم</span><span class="kpi-card__value" id="kpiFinalTotal">0.00</span></div>
-              <div class="kpi-card kpi-card--success"><span class="kpi-card__label">المدفوع</span><span class="kpi-card__value" id="kpiPaid">0.00</span></div>
-              <div class="kpi-card kpi-card--remaining" id="kpiRemainingCard"><span class="kpi-card__label">المتبقي للدفع</span><span class="kpi-card__value" id="kpiRemaining">0.00</span></div>
+              <div class="kpi-card">
+                <span class="kpi-card__label">إجمالي المواد</span
+                ><span class="kpi-card__value" id="kpiMaterialsTotal"
+                  >0.00</span
+                >
+              </div>
+              <div class="kpi-card kpi-card--accent">
+                <span class="kpi-card__label">الإجمالي بعد الخصم</span
+                ><span class="kpi-card__value" id="kpiFinalTotal">0.00</span>
+              </div>
+              <div class="kpi-card kpi-card--success">
+                <span class="kpi-card__label">المدفوع</span
+                ><span class="kpi-card__value" id="kpiPaid">0.00</span>
+              </div>
+              <div class="kpi-card kpi-card--remaining" id="kpiRemainingCard">
+                <span class="kpi-card__label">المتبقي للدفع</span
+                ><span class="kpi-card__value" id="kpiRemaining">0.00</span>
+              </div>
             </div>
-            <div id="financialsDisplayRow" class="financials-display-row"><!-- rendered by JS --></div>
+            <div id="financialsDisplayRow" class="financials-display-row">
+              <!-- rendered by JS -->
+            </div>
           </section>
 
-          <!-- â”€â”€ 7. LPO Section â”€â”€ -->
+          <!-- -- 7. LPO Section -- -->
           <section class="card" id="lpoCard" data-financial>
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                </svg>
                 LPO — طلب شراء مواد
               </h2>
             </div>
@@ -264,28 +488,62 @@
               <div class="form-grid form-grid--lpo">
                 <div class="form-field">
                   <label class="form-label" for="lpoStageSelect">المرحلة</label>
-                  <select id="lpoStageSelect" class="form-input form-input--select"></select>
+                  <select
+                    id="lpoStageSelect"
+                    class="form-input form-input--select"></select>
                 </div>
                 <div class="form-field">
-                  <label class="form-label" for="lpoSupplierInput">اسم المورد</label>
-                  <input type="text" id="lpoSupplierInput" class="form-input" value="-" placeholder="اسم المورد" />
+                  <label class="form-label" for="lpoSupplierInput"
+                    >اسم المورد</label
+                  >
+                  <input
+                    type="text"
+                    id="lpoSupplierInput"
+                    class="form-input"
+                    value="-"
+                    placeholder="اسم المورد" />
                 </div>
                 <div class="form-field form-field--lpo-opts">
                   <div class="form-field">
                     <label class="checkbox-label">
-                      <input type="checkbox" id="lpoTaxInput" class="form-checkbox" checked />
+                      <input
+                        type="checkbox"
+                        id="lpoTaxInput"
+                        class="form-checkbox"
+                        checked />
                       <span>إضافة ضريبة</span>
                     </label>
                   </div>
                   <div class="form-field" id="taxRateField">
-                    <label class="form-label" for="lpoTaxRateInput">نسبة الضريبة (%)</label>
-                    <input type="number" id="lpoTaxRateInput" class="form-input" value="5" step="1" min="0" max="100" />
+                    <label class="form-label" for="lpoTaxRateInput"
+                      >نسبة الضريبة (%)</label
+                    >
+                    <input
+                      type="number"
+                      id="lpoTaxRateInput"
+                      class="form-input"
+                      value="5"
+                      step="1"
+                      min="0"
+                      max="100" />
                   </div>
                   <div class="lpo-actions">
-                    <button class="btn btn--primary btn--sm" data-action="generate-full-lpo">LPO كامل لكل المواد</button>
-                    <button class="btn btn--primary btn--sm" data-action="generate-lpo">إنشاء LPO</button>
-                    <button class="btn btn--ghost btn--sm" data-action="print-lpo">
-                      <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 8H5v11h14V8zm0-2v-2H5v2h14z"/></svg>
+                    <button
+                      class="btn btn--primary btn--sm"
+                      data-action="generate-full-lpo">
+                      LPO كامل لكل المواد
+                    </button>
+                    <button
+                      class="btn btn--primary btn--sm"
+                      data-action="generate-lpo">
+                      إنشاء LPO
+                    </button>
+                    <button
+                      class="btn btn--ghost btn--sm"
+                      data-action="print-lpo">
+                      <svg class="btn__icon" viewBox="0 0 24 24">
+                        <path d="M19 8H5v11h14V8zm0-2v-2H5v2h14z" />
+                      </svg>
                       طباعة
                     </button>
                   </div>
@@ -295,29 +553,46 @@
             <div class="lpo-result" id="lpoResult"></div>
           </section>
 
-          <!-- â”€â”€ 8. Actions â”€â”€ -->
+          <!-- -- 8. Actions -- -->
           <section class="actions-bar">
-            <button class="btn btn--success" data-action="print-full-report" data-financial>
-              <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v4H1v12h3v2h16v-2h3V9h-4V5c0-1.1-.9-2-2-2zm-3 16H8v-5h8v5zm3-7c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-1-7h-8v4h8V5z"/></svg>
+            <button
+              class="btn btn--success"
+              data-action="print-full-report"
+              data-financial>
+              <svg class="btn__icon" viewBox="0 0 24 24">
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v4H1v12h3v2h16v-2h3V9h-4V5c0-1.1-.9-2-2-2zm-3 16H8v-5h8v5zm3-7c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-1-7h-8v4h8V5z" />
+              </svg>
               طباعة التقرير الكامل
             </button>
             <button class="btn btn--info" data-action="print-specs-only">
-              <svg class="btn__icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <svg class="btn__icon" viewBox="0 0 24 24">
+                <path
+                  d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+              </svg>
               طباعة المواصفات
             </button>
-            <button class="btn btn--info" data-action="print-specs-with-designs">
-              <svg class="btn__icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <button
+              class="btn btn--info"
+              data-action="print-specs-with-designs">
+              <svg class="btn__icon" viewBox="0 0 24 24">
+                <path
+                  d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+              </svg>
               طباعة مع التصاميم
             </button>
           </section>
         </div>
 
-        <!-- â•گâ•گ PRODUCTION BOARD â•گâ•گ -->
-        <div id="productionBoardView" style="display:none">
+        <!-- == PRODUCTION BOARD == -->
+        <div id="productionBoardView" style="display: none">
           <section class="card">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+                </svg>
                 لوحة الإنتاج
               </h2>
             </div>
@@ -325,83 +600,142 @@
           </section>
         </div>
 
-        <!-- â•گâ•گ DASHBOARD â•گâ•گ -->
-        <div id="dashboardView" style="display:none">
+        <!-- == DASHBOARD == -->
+        <div id="dashboardView" style="display: none">
           <section class="card dashboard-shell">
             <div class="card__header">
               <h2 class="card__title">
-                <svg class="card__title-icon" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                <svg class="card__title-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                </svg>
                 لوحة القيادة
               </h2>
-              <button class="btn btn--primary btn--sm" data-action="print-dashboard">
-                <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 8H5v11h14V8zm0-2v-2H5v2h14z"/></svg>
+              <button
+                class="btn btn--primary btn--sm"
+                data-action="print-dashboard">
+                <svg class="btn__icon" viewBox="0 0 24 24">
+                  <path d="M19 8H5v11h14V8zm0-2v-2H5v2h14z" />
+                </svg>
                 طباعة
               </button>
             </div>
             <div class="card__body" id="dashboardContent"></div>
           </section>
         </div>
-
       </div>
     </main>
 
-    <!-- â”€â”€â”€ PRINT TEMPLATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
-    <div id="printReportTemplate" class="print-template" aria-hidden="true"></div>
+    <!-- --- PRINT TEMPLATE ------------------------------------- -->
+    <div
+      id="printReportTemplate"
+      class="print-template"
+      aria-hidden="true"></div>
 
-    <!-- â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ
+    <!-- ==========================================================
          DATA ENTRY MODAL — تبويبات رئيسية + فرعية
-    â•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گâ•گ -->
-    <div class="modal entry-modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="entryModalTitle">
+    ========================================================== -->
+    <div
+      class="modal entry-modal"
+      id="entryModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="entryModalTitle">
       <div class="modal__backdrop" data-action="close-entry-modal"></div>
       <div class="entry-modal__panel">
-
         <!-- Header -->
         <div class="entry-modal__header">
           <div class="entry-modal__header-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+            </svg>
           </div>
           <div class="entry-modal__header-info">
-            <h2 class="entry-modal__title" id="entryModalTitle">إدخال وتعديل بيانات المشروع</h2>
-            <p class="entry-modal__subtitle" id="entryModalSubtitle">مشروع جديد</p>
+            <h2 class="entry-modal__title" id="entryModalTitle">
+              إدخال وتعديل بيانات المشروع
+            </h2>
+            <p class="entry-modal__subtitle" id="entryModalSubtitle">
+              مشروع جديد
+            </p>
           </div>
-          <button class="btn btn--ghost btn--icon" data-action="close-entry-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-entry-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
 
         <!-- Primary tabs -->
         <div class="entry-ptabs" role="tablist">
           <button class="entry-ptab active" data-ptab="project" role="tab">
-            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
             المشروع
           </button>
           <button class="entry-ptab" data-ptab="specs" role="tab">
-            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" />
+            </svg>
             المواصفات
           </button>
           <button class="entry-ptab" data-ptab="materials" role="tab">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+            </svg>
             المواد
           </button>
-          <button class="entry-ptab" data-ptab="financials" role="tab" data-financial>
-            <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          <button
+            class="entry-ptab"
+            data-ptab="financials"
+            role="tab"
+            data-financial>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
+            </svg>
             المالية
           </button>
           <button class="entry-ptab" data-ptab="designs" role="tab">
-            <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+            </svg>
             التصاميم
           </button>
         </div>
 
         <!-- Body -->
         <div class="entry-modal__body">
-
-          <!-- â•گâ•گ PROJECT â•گâ•گ -->
+          <!-- == PROJECT == -->
           <div class="entry-ppane active" id="entryPane-project">
             <div class="entry-stabs">
-              <button class="entry-stab active" data-stab="basics" data-parent="project">العميل والموقع</button>
-              <button class="entry-stab" data-stab="dates" data-parent="project">التواريخ</button>
-              <button class="entry-stab" data-stab="notes" data-parent="project">الملاحظات</button>
+              <button
+                class="entry-stab active"
+                data-stab="basics"
+                data-parent="project">
+                العميل والموقع
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="dates"
+                data-parent="project">
+                التواريخ
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="notes"
+                data-parent="project">
+                الملاحظات
+              </button>
             </div>
 
             <div class="entry-spane active" id="entrySpane-project-basics">
@@ -409,57 +743,116 @@
                 <div class="ef-field">
                   <label class="form-label" for="projectId">رقم المشروع</label>
                   <div class="id-field-wrap">
-                    <input type="text" id="projectId" class="form-input form-input--mono" readonly />
-                    <button class="btn btn--ghost btn--icon" data-action="copy-id" title="نسخ رقم المشروع">
-                      <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    <input
+                      type="text"
+                      id="projectId"
+                      class="form-input form-input--mono"
+                      readonly />
+                    <button
+                      class="btn btn--ghost btn--icon"
+                      data-action="copy-id"
+                      title="نسخ رقم المشروع">
+                      <svg viewBox="0 0 24 24">
+                        <path
+                          d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                      </svg>
                     </button>
                   </div>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="projectNameInput">اسم المشروع <span class="form-required">*</span></label>
-                  <input type="text" id="projectNameInput" class="form-input" placeholder="اسم المشروع" />
+                  <label class="form-label" for="projectNameInput"
+                    >اسم المشروع <span class="form-required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="projectNameInput"
+                    class="form-input"
+                    placeholder="اسم المشروع" />
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="clientInput">اسم العميل</label>
-                  <input type="text" id="clientInput" class="form-input" placeholder="اسم العميل الكامل" />
+                  <input
+                    type="text"
+                    id="clientInput"
+                    class="form-input"
+                    placeholder="اسم العميل الكامل" />
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="salesInput">البائع</label>
-                  <input type="text" id="salesInput" class="form-input" placeholder="اسم البائع" />
+                  <input
+                    type="text"
+                    id="salesInput"
+                    class="form-input"
+                    placeholder="اسم البائع" />
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="phoneInput">رقم التليفون</label>
+                  <label class="form-label" for="phoneInput"
+                    >رقم التليفون</label
+                  >
                   <div class="input-action-wrap">
-                    <input type="tel" id="phoneInput" class="form-input" placeholder="+971 50 123 4567" />
-                    <button class="btn btn--ghost btn--icon" data-action="open-whatsapp" title="واتساب">
-                      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <input
+                      type="tel"
+                      id="phoneInput"
+                      class="form-input"
+                      placeholder="+971 50 123 4567" />
+                    <button
+                      class="btn btn--ghost btn--icon"
+                      data-action="open-whatsapp"
+                      title="واتساب">
+                      <svg viewBox="0 0 24 24">
+                        <path
+                          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                      </svg>
                     </button>
                   </div>
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="emirateInput">الإمارة</label>
-                  <select id="emirateInput" class="form-input form-input--select">
+                  <select
+                    id="emirateInput"
+                    class="form-input form-input--select">
                     <option value="">اختر الإمارة</option>
-                    <option>أبوظبي</option><option>دبي</option><option>الشارقة</option>
-                    <option>عجمان</option><option>أم القيوين</option><option>رأس الخيمة</option><option>الفجيرة</option>
+                    <option>أبوظبي</option>
+                    <option>دبي</option>
+                    <option>الشارقة</option>
+                    <option>عجمان</option>
+                    <option>أم القيوين</option>
+                    <option>رأس الخيمة</option>
+                    <option>الفجيرة</option>
                   </select>
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="addressInput">العنوان</label>
-                  <input type="text" id="addressInput" class="form-input" placeholder="العنوان التفصيلي" />
+                  <input
+                    type="text"
+                    id="addressInput"
+                    class="form-input"
+                    placeholder="العنوان التفصيلي" />
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="locationInput">رابط الموقع</label>
+                  <label class="form-label" for="locationInput"
+                    >رابط الموقع</label
+                  >
                   <div class="input-action-wrap">
-                    <input type="text" id="locationInput" class="form-input" placeholder="رابط خرائط جوجل" />
-                    <button class="btn btn--ghost btn--icon" data-action="open-maps" title="فتح الخريطة">
-                      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <input
+                      type="text"
+                      id="locationInput"
+                      class="form-input"
+                      placeholder="رابط خرائط جوجل" />
+                    <button
+                      class="btn btn--ghost btn--icon"
+                      data-action="open-maps"
+                      title="فتح الخريطة">
+                      <svg viewBox="0 0 24 24">
+                        <path
+                          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -469,39 +862,75 @@
             <div class="entry-spane" id="entrySpane-project-dates">
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="dateInput">تاريخ الاتفاق</label>
+                  <label class="form-label" for="dateInput"
+                    >تاريخ الاتفاق</label
+                  >
                   <input type="date" id="dateInput" class="form-input" />
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="deliveryDateInput">تاريخ التسليم المتفق</label>
-                  <input type="date" id="deliveryDateInput" class="form-input" />
+                  <label class="form-label" for="deliveryDateInput"
+                    >تاريخ التسليم المتفق</label
+                  >
+                  <input
+                    type="date"
+                    id="deliveryDateInput"
+                    class="form-input" />
                 </div>
               </div>
               <div class="ef-hint">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                تواريخ التصنيع والتركيب والتسليم الفعلي تُستخرج تلقائياً عند الإنجاز في مراحل العمل
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                </svg>
+                تواريخ التصنيع والتركيب والتسليم الفعلي تُستخرج تلقائياً عند
+                الإنجاز في مراحل العمل
               </div>
             </div>
 
             <div class="entry-spane" id="entrySpane-project-notes">
               <div id="specsNotesList" class="notes-list"></div>
               <div class="notes-input-wrap">
-                <input type="text" id="specsNotesInput" class="form-input" placeholder="أضف ملاحظة واضغط Enter" />
-                <button class="btn btn--primary btn--sm" data-action="add-spec-note">
-                  <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                <input
+                  type="text"
+                  id="specsNotesInput"
+                  class="form-input"
+                  placeholder="أضف ملاحظة واضغط Enter" />
+                <button
+                  class="btn btn--primary btn--sm"
+                  data-action="add-spec-note">
+                  <svg class="btn__icon" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                  </svg>
                   إضافة
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- â•گâ•گ SPECS â•گâ•گ -->
+          <!-- == SPECS == -->
           <div class="entry-ppane" id="entryPane-specs">
             <div class="entry-stabs">
-              <button class="entry-stab active" data-stab="boxes-doors" data-parent="specs">البوكسات والضلفات</button>
-              <button class="entry-stab" data-stab="drawers-handles" data-parent="specs">الأدراج والمسكات</button>
-              <button class="entry-stab" data-stab="counter-extras" data-parent="specs">الرخام والإضافات</button>
-              <button class="entry-stab" data-stab="lights" data-parent="specs">الإضاءة والجزيرة</button>
+              <button
+                class="entry-stab active"
+                data-stab="boxes-doors"
+                data-parent="specs">
+                البوكسات والضلفات
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="drawers-handles"
+                data-parent="specs">
+                الأدراج والمسكات
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="counter-extras"
+                data-parent="specs">
+                الرخام والإضافات
+              </button>
+              <button class="entry-stab" data-stab="lights" data-parent="specs">
+                الإضاءة والجزيرة
+              </button>
             </div>
 
             <div class="entry-spane active" id="entrySpane-specs-boxes-doors">
@@ -509,25 +938,45 @@
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="boxTypeInput">النوع</label>
-                  <select id="boxTypeInput" class="form-input form-input--select">
+                  <select
+                    id="boxTypeInput"
+                    class="form-input form-input--select">
                     <option value="ألومينيوم">ألومينيوم</option>
                     <option value="خشب">خشب</option>
                   </select>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="boxColorInput">كود اللون</label>
-                  <input type="text" id="boxColorInput" class="form-input" placeholder="مثال: 9010 حليبي" />
+                  <label class="form-label" for="boxColorInput"
+                    >كود اللون</label
+                  >
+                  <input
+                    type="text"
+                    id="boxColorInput"
+                    class="form-input"
+                    placeholder="مثال: 9010 حليبي" />
                 </div>
               </div>
-              <div class="spec-group-title" style="margin-top:var(--sp-4)">الضلفات</div>
+              <div class="spec-group-title" style="margin-top: var(--sp-4)">
+                الضلفات
+              </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="doorTypeInput">النوع</label>
-                  <input type="text" id="doorTypeInput" class="form-input" placeholder="نوع الضلفات" />
+                  <input
+                    type="text"
+                    id="doorTypeInput"
+                    class="form-input"
+                    placeholder="نوع الضلفات" />
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="doorColorInput">كود اللون</label>
-                  <input type="text" id="doorColorInput" class="form-input" placeholder="كود اللون" />
+                  <label class="form-label" for="doorColorInput"
+                    >كود اللون</label
+                  >
+                  <input
+                    type="text"
+                    id="doorColorInput"
+                    class="form-input"
+                    placeholder="كود اللون" />
                 </div>
               </div>
             </div>
@@ -537,25 +986,41 @@
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="drawerTypeInput">النوع</label>
-                  <select id="drawerTypeInput" class="form-input form-input--select">
+                  <select
+                    id="drawerTypeInput"
+                    class="form-input form-input--select">
                     <option value="تاندم بوكس">تاندم بوكس</option>
                     <option value="عادية (سوفت كلوز)">عادية (سوفت كلوز)</option>
                   </select>
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="drawerCountInput">العدد</label>
-                  <input type="text" id="drawerCountInput" class="form-input" placeholder="عدد الأدراج" />
+                  <input
+                    type="text"
+                    id="drawerCountInput"
+                    class="form-input"
+                    placeholder="عدد الأدراج" />
                 </div>
               </div>
-              <div class="spec-group-title" style="margin-top:var(--sp-4)">المسكات</div>
+              <div class="spec-group-title" style="margin-top: var(--sp-4)">
+                المسكات
+              </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="handleTypeInput">النوع</label>
-                  <input type="text" id="handleTypeInput" class="form-input" placeholder="نوع المسكات" />
+                  <input
+                    type="text"
+                    id="handleTypeInput"
+                    class="form-input"
+                    placeholder="نوع المسكات" />
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="handleColorInput">اللون</label>
-                  <input type="text" id="handleColorInput" class="form-input" placeholder="اللون" />
+                  <input
+                    type="text"
+                    id="handleColorInput"
+                    class="form-input"
+                    placeholder="اللون" />
                 </div>
               </div>
             </div>
@@ -565,18 +1030,34 @@
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="counterTypeInput">النوع</label>
-                  <input type="text" id="counterTypeInput" class="form-input" placeholder="النوع" />
+                  <input
+                    type="text"
+                    id="counterTypeInput"
+                    class="form-input"
+                    placeholder="النوع" />
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="counterColorInput">اللون</label>
-                  <input type="text" id="counterColorInput" class="form-input" placeholder="اللون" />
+                  <label class="form-label" for="counterColorInput"
+                    >اللون</label
+                  >
+                  <input
+                    type="text"
+                    id="counterColorInput"
+                    class="form-input"
+                    placeholder="اللون" />
                 </div>
               </div>
-              <div class="spec-group-title" style="margin-top:var(--sp-4)">النعلة السفلية والفيلر</div>
+              <div class="spec-group-title" style="margin-top: var(--sp-4)">
+                النعلة السفلية والفيلر
+              </div>
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="skirtingNeededInput">النعلة السفلية</label>
-                  <select id="skirtingNeededInput" class="form-input form-input--select">
+                  <label class="form-label" for="skirtingNeededInput"
+                    >النعلة السفلية</label
+                  >
+                  <select
+                    id="skirtingNeededInput"
+                    class="form-input form-input--select">
                     <option value="لا يحتاج">لا يحتاج</option>
                     <option value="تيوب 10سم">تيوب 10سم</option>
                     <option value="PVC 10cm">PVC 10cm</option>
@@ -584,8 +1065,12 @@
                   </select>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="upperFillerNeededInput">الفيلر العلوي</label>
-                  <select id="upperFillerNeededInput" class="form-input form-input--select">
+                  <label class="form-label" for="upperFillerNeededInput"
+                    >الفيلر العلوي</label
+                  >
+                  <select
+                    id="upperFillerNeededInput"
+                    class="form-input form-input--select">
                     <option value="نعم">نعم</option>
                     <option value="لا">لا</option>
                   </select>
@@ -597,46 +1082,82 @@
               <div class="spec-group-title">الإضاءة</div>
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="lightsNeededInput">مطلوب إضاءة؟</label>
-                  <select id="lightsNeededInput" class="form-input form-input--select">
+                  <label class="form-label" for="lightsNeededInput"
+                    >مطلوب إضاءة؟</label
+                  >
+                  <select
+                    id="lightsNeededInput"
+                    class="form-input form-input--select">
                     <option value="نعم">نعم</option>
                     <option value="لا">لا</option>
                   </select>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="lightsDescriptionInput">الوصف</label>
-                  <input type="text" id="lightsDescriptionInput" class="form-input" placeholder="وصف الإضاءة" />
+                  <label class="form-label" for="lightsDescriptionInput"
+                    >الوصف</label
+                  >
+                  <input
+                    type="text"
+                    id="lightsDescriptionInput"
+                    class="form-input"
+                    placeholder="وصف الإضاءة" />
                 </div>
               </div>
-              <div class="spec-group-title" style="margin-top:var(--sp-4)">الجزيرة</div>
+              <div class="spec-group-title" style="margin-top: var(--sp-4)">
+                الجزيرة
+              </div>
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="islandNeededInput">مطلوب جزيرة؟</label>
-                  <select id="islandNeededInput" class="form-input form-input--select">
+                  <label class="form-label" for="islandNeededInput"
+                    >مطلوب جزيرة؟</label
+                  >
+                  <select
+                    id="islandNeededInput"
+                    class="form-input form-input--select">
                     <option value="نعم">نعم</option>
                     <option value="لا">لا</option>
                   </select>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="islandDescriptionInput">مواصفات الجزيرة</label>
-                  <input type="text" id="islandDescriptionInput" class="form-input" placeholder="المقاس والوصف" />
+                  <label class="form-label" for="islandDescriptionInput"
+                    >مواصفات الجزيرة</label
+                  >
+                  <input
+                    type="text"
+                    id="islandDescriptionInput"
+                    class="form-input"
+                    placeholder="المقاس والوصف" />
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- â•گâ•گ MATERIALS â•گâ•گ -->
+          <!-- == MATERIALS == -->
           <div class="entry-ppane" id="entryPane-materials">
             <div class="entry-stabs">
-              <button class="entry-stab active" data-stab="add-item" data-parent="materials">إضافة مادة</button>
-              <button class="entry-stab" data-stab="view-items" data-parent="materials">عرض المواد</button>
+              <button
+                class="entry-stab active"
+                data-stab="add-item"
+                data-parent="materials">
+                إضافة مادة
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="view-items"
+                data-parent="materials">
+                عرض المواد
+              </button>
             </div>
 
             <div class="entry-spane active" id="entrySpane-materials-add-item">
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="itemStageSelect">المرحلة</label>
-                  <select id="itemStageSelect" class="form-input form-input--select">
+                  <label class="form-label" for="itemStageSelect"
+                    >المرحلة</label
+                  >
+                  <select
+                    id="itemStageSelect"
+                    class="form-input form-input--select">
                     <option value="boxes">مرحلة البوكسات</option>
                     <option value="doors">مرحلة الضلفات</option>
                     <option value="counter">مرحلة الرخام</option>
@@ -646,49 +1167,89 @@
                   </select>
                 </div>
                 <div class="ef-field ef-field--autocomplete">
-                  <label class="form-label" for="itemNameInput">اسم المادة</label>
+                  <label class="form-label" for="itemNameInput"
+                    >اسم المادة</label
+                  >
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="itemNameInput" class="form-input" placeholder="ابدأ الكتابة..." autocomplete="off" />
+                    <input
+                      type="text"
+                      id="itemNameInput"
+                      class="form-input"
+                      placeholder="ابدأ الكتابة..."
+                      autocomplete="off" />
                   </div>
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="form-label" for="itemUnitSelect">الوحدة</label>
-                  <select id="itemUnitSelect" class="form-input form-input--select"></select>
+                  <select
+                    id="itemUnitSelect"
+                    class="form-input form-input--select"></select>
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="itemQtyInput">الكمية</label>
-                  <input type="number" id="itemQtyInput" class="form-input" placeholder="0" step="1" min="0" />
+                  <input
+                    type="number"
+                    id="itemQtyInput"
+                    class="form-input"
+                    placeholder="0"
+                    step="1"
+                    min="0" />
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="itemPriceInput">السعر</label>
-                  <input type="number" id="itemPriceInput" class="form-input" placeholder="0.00" step="0.10" min="0" />
+                  <input
+                    type="number"
+                    id="itemPriceInput"
+                    class="form-input"
+                    placeholder="0.00"
+                    step="0.10"
+                    min="0" />
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="checkbox-label">
-                    <input type="checkbox" id="itemNeedsPaintInput" class="form-checkbox" />
+                    <input
+                      type="checkbox"
+                      id="itemNeedsPaintInput"
+                      class="form-checkbox" />
                     <span>يحتاج صبغ</span>
                   </label>
                 </div>
               </div>
-              <div id="paintFields" style="display:none">
+              <div id="paintFields" style="display: none">
                 <div class="ef-row">
                   <div class="ef-field">
-                    <label class="form-label" for="itemPaintCostInput">تكلفة الصبغ للوحدة</label>
-                    <input type="number" id="itemPaintCostInput" class="form-input" placeholder="0.00" step="1" min="0" />
+                    <label class="form-label" for="itemPaintCostInput"
+                      >تكلفة الصبغ للوحدة</label
+                    >
+                    <input
+                      type="number"
+                      id="itemPaintCostInput"
+                      class="form-input"
+                      placeholder="0.00"
+                      step="1"
+                      min="0" />
                   </div>
                   <div class="ef-field">
-                    <label class="form-label" for="itemPaintColorInput">لون الصبغ</label>
-                    <input type="text" id="itemPaintColorInput" class="form-input" placeholder="لون الصبغ" />
+                    <label class="form-label" for="itemPaintColorInput"
+                      >لون الصبغ</label
+                    >
+                    <input
+                      type="text"
+                      id="itemPaintColorInput"
+                      class="form-input"
+                      placeholder="لون الصبغ" />
                   </div>
                 </div>
               </div>
               <div class="ef-actions">
                 <button class="btn btn--primary" data-action="add-item">
-                  <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                  <svg class="btn__icon" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                  </svg>
                   إضافة المادة
                 </button>
               </div>
@@ -699,175 +1260,361 @@
             </div>
           </div>
 
-          <!-- â•گâ•گ FINANCIALS â•گâ•گ -->
+          <!-- == FINANCIALS == -->
           <div class="entry-ppane" id="entryPane-financials" data-financial>
             <div class="entry-stabs">
-              <button class="entry-stab active" data-stab="agreement" data-parent="financials">الاتفاق المالي</button>
-              <button class="entry-stab" data-stab="lpo-entry" data-parent="financials">LPO</button>
+              <button
+                class="entry-stab active"
+                data-stab="agreement"
+                data-parent="financials">
+                الاتفاق المالي
+              </button>
+              <button
+                class="entry-stab"
+                data-stab="lpo-entry"
+                data-parent="financials">
+                LPO
+              </button>
             </div>
 
-            <div class="entry-spane active" id="entrySpane-financials-agreement">
+            <div
+              class="entry-spane active"
+              id="entrySpane-financials-agreement">
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="totalAmountInput">المبلغ الإجمالي المتفق عليه</label>
-                  <input type="number" id="totalAmountInput" class="form-input" placeholder="0" min="0" step="1" />
+                  <label class="form-label" for="totalAmountInput"
+                    >المبلغ الإجمالي المتفق عليه</label
+                  >
+                  <input
+                    type="number"
+                    id="totalAmountInput"
+                    class="form-input"
+                    placeholder="0"
+                    min="0"
+                    step="1" />
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="discountInput">الخصم</label>
-                  <input type="number" id="discountInput" class="form-input" placeholder="0" min="0" step="1" />
+                  <input
+                    type="number"
+                    id="discountInput"
+                    class="form-input"
+                    placeholder="0"
+                    min="0"
+                    step="1" />
                 </div>
                 <div class="ef-field">
                   <label class="form-label" for="paidInput">المدفوع</label>
-                  <input type="number" id="paidInput" class="form-input" placeholder="0" min="0" step="1" />
+                  <input
+                    type="number"
+                    id="paidInput"
+                    class="form-input"
+                    placeholder="0"
+                    min="0"
+                    step="1" />
                 </div>
               </div>
               <!-- Live financial summary -->
               <div class="financials-live" id="financialsLive">
-                <div class="fls-item"><span class="fls-label">الإجمالي بعد الخصم</span><span class="fls-val" id="flsNet">0.00</span></div>
+                <div class="fls-item">
+                  <span class="fls-label">الإجمالي بعد الخصم</span
+                  ><span class="fls-val" id="flsNet">0.00</span>
+                </div>
                 <div class="fls-sep"></div>
-                <div class="fls-item fls-paid"><span class="fls-label">المدفوع</span><span class="fls-val" id="flsPaid">0.00</span></div>
+                <div class="fls-item fls-paid">
+                  <span class="fls-label">المدفوع</span
+                  ><span class="fls-val" id="flsPaid">0.00</span>
+                </div>
                 <div class="fls-sep"></div>
-                <div class="fls-item fls-remaining"><span class="fls-label">المتبقي</span><span class="fls-val" id="flsRemaining">0.00</span></div>
+                <div class="fls-item fls-remaining">
+                  <span class="fls-label">المتبقي</span
+                  ><span class="fls-val" id="flsRemaining">0.00</span>
+                </div>
               </div>
             </div>
 
             <div class="entry-spane" id="entrySpane-financials-lpo-entry">
               <div class="ef-row">
                 <div class="ef-field">
-                  <label class="form-label" for="lpoStageSelectM">المرحلة</label>
-                  <select id="lpoStageSelectM" class="form-input form-input--select"></select>
+                  <label class="form-label" for="lpoStageSelectM"
+                    >المرحلة</label
+                  >
+                  <select
+                    id="lpoStageSelectM"
+                    class="form-input form-input--select"></select>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="lpoSupplierInputM">اسم المورد</label>
-                  <input type="text" id="lpoSupplierInputM" class="form-input" placeholder="اسم المورد" />
+                  <label class="form-label" for="lpoSupplierInputM"
+                    >اسم المورد</label
+                  >
+                  <input
+                    type="text"
+                    id="lpoSupplierInputM"
+                    class="form-input"
+                    placeholder="اسم المورد" />
                 </div>
               </div>
               <div class="ef-row">
                 <div class="ef-field">
                   <label class="checkbox-label">
-                    <input type="checkbox" id="lpoTaxInputM" class="form-checkbox" checked />
+                    <input
+                      type="checkbox"
+                      id="lpoTaxInputM"
+                      class="form-checkbox"
+                      checked />
                     <span>إضافة ضريبة</span>
                   </label>
                 </div>
                 <div class="ef-field">
-                  <label class="form-label" for="lpoTaxRateInputM">نسبة الضريبة (%)</label>
-                  <input type="number" id="lpoTaxRateInputM" class="form-input" value="5" step="1" min="0" max="100" />
+                  <label class="form-label" for="lpoTaxRateInputM"
+                    >نسبة الضريبة (%)</label
+                  >
+                  <input
+                    type="number"
+                    id="lpoTaxRateInputM"
+                    class="form-input"
+                    value="5"
+                    step="1"
+                    min="0"
+                    max="100" />
                 </div>
               </div>
               <div class="ef-actions">
-                <button class="btn btn--primary btn--sm" id="modalLpoBtn" data-action="generate-lpo-modal">إنشاء LPO</button>
-                <button class="btn btn--ghost btn--sm" id="modalFullLpoBtn" data-action="generate-full-lpo-modal">LPO كامل</button>
+                <button
+                  class="btn btn--primary btn--sm"
+                  id="modalLpoBtn"
+                  data-action="generate-lpo-modal">
+                  إنشاء LPO
+                </button>
+                <button
+                  class="btn btn--ghost btn--sm"
+                  id="modalFullLpoBtn"
+                  data-action="generate-full-lpo-modal">
+                  LPO كامل
+                </button>
               </div>
-              <div id="modalLpoResult" class="lpo-result" style="margin-top:var(--sp-4);"></div>
+              <div
+                id="modalLpoResult"
+                class="lpo-result"
+                style="margin-top: var(--sp-4)"></div>
             </div>
           </div>
 
-          <!-- â•گâ•گ DESIGNS â•گâ•گ -->
+          <!-- == DESIGNS == -->
           <div class="entry-ppane" id="entryPane-designs">
             <div class="designs-upload">
               <label class="upload-area" id="designDropZone">
-                <svg class="upload-area__icon" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-                <span class="upload-area__text">اسحب الصور أو <strong>اختر ملفات</strong></span>
-                <span class="upload-area__hint">PNG, JPG • حد أقصى 5MB للصورة • يمكن رفع عدة صور</span>
-                <input type="file" id="designFileInput" accept="image/*" class="upload-area__input" multiple />
+                <svg class="upload-area__icon" viewBox="0 0 144 24">
+                  <path
+                    d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
+                </svg>
+                <span class="upload-area__text"
+                  >اسحب الصور أو <strong>اختر ملفات</strong></span
+                >
+                <span class="upload-area__hint"
+                  >PNG, JPG • حد أقصى 5MB للصورة • يمكن رفع عدة صور</span
+                >
+                <input
+                  type="file"
+                  id="designFileInput"
+                  accept="image/*"
+                  class="upload-area__input"
+                  multiple />
               </label>
               <div class="designs-upload__actions">
-                <button class="btn btn--primary btn--sm" data-action="upload-designs">
-                  <svg class="btn__icon" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                <button
+                  class="btn btn--primary btn--sm"
+                  data-action="upload-designs">
+                  <svg class="btn__icon" viewBox="0 0 24 24">
+                    <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                  </svg>
                   رفع الصور
                 </button>
-                <button class="btn btn--ghost btn--sm" data-action="clear-designs-upload">مسح الاختيار</button>
+                <button
+                  class="btn btn--ghost btn--sm"
+                  data-action="clear-designs-upload">
+                  مسح الاختيار
+                </button>
               </div>
             </div>
-            <div class="designs-gallery" id="modalDesignsGallery" style="margin-top:var(--sp-4);"></div>
+            <div
+              class="designs-gallery"
+              id="modalDesignsGallery"
+              style="margin-top: var(--sp-4)"></div>
           </div>
-
-        </div><!-- /body -->
+        </div>
+        <!-- /body -->
 
         <!-- Footer -->
         <div class="entry-modal__footer">
-          <button class="btn btn--ghost" data-action="close-entry-modal">إغلاق</button>
+          <button class="btn btn--ghost" data-action="close-entry-modal">
+            إغلاق
+          </button>
           <button class="btn btn--success" data-action="save-from-entry-modal">
-            <svg class="btn__icon" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z"/></svg>
+            <svg class="btn__icon" viewBox="0 0 24 24">
+              <path
+                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-3 16H7v-5h7v5zm3-12H5V5h12v2z" />
+            </svg>
             حفظ وإغلاق
           </button>
         </div>
       </div>
     </div>
 
-    <!-- â”€â”€â”€ STANDARD MODALS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
-    <div class="modal" id="projectsModal" role="dialog" aria-modal="true" aria-labelledby="projectsModalTitle">
+    <!-- --- STANDARD MODALS ------------------------------------ -->
+    <div
+      class="modal"
+      id="projectsModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="projectsModalTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content modal__content--lg">
         <div class="modal__header">
           <h2 class="modal__title" id="projectsModalTitle">كل المشاريع</h2>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body">
           <div class="projects-search-wrap">
-            <input type="text" id="projectsSearchInput" class="form-input" placeholder="🔍  ابحث بالاسم أو رقم المشروع..." autocomplete="off" />
+            <input
+              type="text"
+              id="projectsSearchInput"
+              class="form-input"
+              placeholder="🔍  ابحث بالاسم أو رقم المشروع..."
+              autocomplete="off" />
           </div>
           <div class="projects-list" id="projectsModalList"></div>
         </div>
         <div class="modal__footer">
-            <button class="btn btn--primary btn--sm" data-action="print-projects-table" data-financial>طباعة جدول المشاريع</button>
-          <button class="btn btn--danger btn--sm" data-action="delete-all" data-owner-only>حذف جميع المشاريع</button>
-          <button class="btn btn--ghost btn--sm" data-action="close-modal">إغلاق</button>
+          <button
+            class="btn btn--primary btn--sm"
+            data-action="print-projects-table"
+            data-financial>
+            طباعة جدول المشاريع
+          </button>
+          <button
+            class="btn btn--danger btn--sm"
+            data-action="delete-all"
+            data-owner-only>
+            حذف جميع المشاريع
+          </button>
+          <button class="btn btn--ghost btn--sm" data-action="close-modal">
+            إغلاق
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+    <div
+      class="modal"
+      id="importModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="importModalTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content">
         <div class="modal__header">
           <h2 class="modal__title" id="importModalTitle">استيراد مشروع</h2>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body">
           <div class="import-file-section">
-            <button class="btn btn--primary btn--sm" data-action="import-project-file">
-              <svg class="btn__icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/></svg>
+            <button
+              class="btn btn--primary btn--sm"
+              data-action="import-project-file">
+              <svg class="btn__icon" viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z" />
+              </svg>
               استيراد من ملف JSON
             </button>
-            <input type="file" id="importFileInput" accept=".json" style="display:none" />
+            <input
+              type="file"
+              id="importFileInput"
+              accept=".json"
+              style="display: none" />
           </div>
           <div class="import-divider"><span>أو</span></div>
           <div class="form-field">
-            <label class="form-label" for="importDataInput">الصق بيانات المشروع (JSON)</label>
-            <textarea id="importDataInput" class="form-input form-input--textarea" rows="8" placeholder='{"client":"اسم العميل", ...}'></textarea>
+            <label class="form-label" for="importDataInput"
+              >الصق بيانات المشروع (JSON)</label
+            >
+            <textarea
+              id="importDataInput"
+              class="form-input form-input--textarea"
+              rows="8"
+              placeholder='{"client":"اسم العميل", ...}'></textarea>
           </div>
         </div>
         <div class="modal__footer">
-          <button class="btn btn--success btn--sm" data-action="do-import">استيراد</button>
-          <button class="btn btn--ghost btn--sm" data-action="close-modal">إلغاء</button>
+          <button class="btn btn--success btn--sm" data-action="do-import">
+            استيراد
+          </button>
+          <button class="btn btn--ghost btn--sm" data-action="close-modal">
+            إلغاء
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div
+      class="modal"
+      id="confirmModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirmTitle">
       <div class="modal__backdrop"></div>
       <div class="modal__content modal__content--sm">
-        <div class="modal__header"><h2 class="modal__title" id="confirmTitle">تأكيد</h2></div>
-        <div class="modal__body"><p class="confirm-message" id="confirmMessage"></p></div>
+        <div class="modal__header">
+          <h2 class="modal__title" id="confirmTitle">تأكيد</h2>
+        </div>
+        <div class="modal__body">
+          <p class="confirm-message" id="confirmMessage"></p>
+        </div>
         <div class="modal__footer">
-          <button class="btn btn--danger btn--sm" id="confirmOkBtn">تأكيد</button>
-          <button class="btn btn--ghost btn--sm" id="confirmCancelBtn">إلغاء</button>
+          <button class="btn btn--danger btn--sm" id="confirmOkBtn">
+            تأكيد
+          </button>
+          <button class="btn btn--ghost btn--sm" id="confirmCancelBtn">
+            إلغاء
+          </button>
         </div>
       </div>
     </div>
 
-    <div id="editItemModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="editItemModalTitle">
+    <div
+      id="editItemModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editItemModalTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content modal__content--lg">
         <div class="modal__header">
           <h2 class="modal__title" id="editItemModalTitle">تعديل المادة</h2>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body">
@@ -875,118 +1622,266 @@
             <input type="hidden" id="editItemStage" value="" />
             <input type="hidden" id="editItemIndex" value="" />
             <div class="form-row">
-              <div class="form-group"><label for="editItemName" class="form-label">اسم المادة</label><input type="text" id="editItemName" class="form-input" required /></div>
-              <div class="form-group"><label for="editItemQty" class="form-label">الكمية</label><input type="number" id="editItemQty" class="form-input" min="0" step="1" required /></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label for="editItemUnit" class="form-label">الوحدة</label><select id="editItemUnit" class="form-input form-input--select" required></select></div>
-              <div class="form-group"><label for="editItemPrice" class="form-label">السعر</label><input type="number" id="editItemPrice" class="form-input" min="0" step="0.10" required /></div>
+              <div class="form-group">
+                <label for="editItemName" class="form-label">اسم المادة</label
+                ><input
+                  type="text"
+                  id="editItemName"
+                  class="form-input"
+                  required />
+              </div>
+              <div class="form-group">
+                <label for="editItemQty" class="form-label">الكمية</label
+                ><input
+                  type="number"
+                  id="editItemQty"
+                  class="form-input"
+                  min="0"
+                  step="1"
+                  required />
+              </div>
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label class="checkbox-label"><input type="checkbox" id="editItemNeedsPaint" /><span>يحتاج صبغ</span></label>
+                <label for="editItemUnit" class="form-label">الوحدة</label
+                ><select
+                  id="editItemUnit"
+                  class="form-input form-input--select"
+                  required></select>
+              </div>
+              <div class="form-group">
+                <label for="editItemPrice" class="form-label">السعر</label
+                ><input
+                  type="number"
+                  id="editItemPrice"
+                  class="form-input"
+                  min="0"
+                  step="0.10"
+                  required />
               </div>
             </div>
-            <div class="form-group" id="editPaintFields" style="display:none">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="checkbox-label"
+                  ><input type="checkbox" id="editItemNeedsPaint" /><span
+                    >يحتاج صبغ</span
+                  ></label
+                >
+              </div>
+            </div>
+            <div class="form-group" id="editPaintFields" style="display: none">
               <div class="form-row">
-                <div class="form-group"><label for="editItemPaintCost" class="form-label">تكلفة الصبغ للوحدة</label><input type="number" id="editItemPaintCost" class="form-input" min="0" step="1" /></div>
-                <div class="form-group"><label for="editItemPaintColor" class="form-label">لون الصبغ</label><input type="text" id="editItemPaintColor" class="form-input" placeholder="لون الصبغ" /></div>
+                <div class="form-group">
+                  <label for="editItemPaintCost" class="form-label"
+                    >تكلفة الصبغ للوحدة</label
+                  ><input
+                    type="number"
+                    id="editItemPaintCost"
+                    class="form-input"
+                    min="0"
+                    step="1" />
+                </div>
+                <div class="form-group">
+                  <label for="editItemPaintColor" class="form-label"
+                    >لون الصبغ</label
+                  ><input
+                    type="text"
+                    id="editItemPaintColor"
+                    class="form-input"
+                    placeholder="لون الصبغ" />
+                </div>
               </div>
             </div>
             <div class="form-actions">
-              <button type="button" class="btn btn--ghost" data-action="close-modal">إلغاء</button>
-              <button type="button" class="btn btn--primary" data-action="update-item">تحديث المادة</button>
+              <button
+                type="button"
+                class="btn btn--ghost"
+                data-action="close-modal">
+                إلغاء
+              </button>
+              <button
+                type="button"
+                class="btn btn--primary"
+                data-action="update-item">
+                تحديث المادة
+              </button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="adminPanelModal" role="dialog" aria-modal="true" aria-labelledby="adminPanelTitle">
+    <div
+      class="modal"
+      id="adminPanelModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adminPanelTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content modal__content--lg admin-modal">
         <div class="modal__header">
           <div>
-            <h2 class="modal__title" id="adminPanelTitle">لوحة التحكم الإدارية</h2>
-            <p class="admin-modal__subtitle">هذه اللوحة تظهر فقط للحساب المالك وتتحكم في صلاحيات المستخدمين وما يظهر لهم داخل النظام.</p>
+            <h2 class="modal__title" id="adminPanelTitle">
+              لوحة التحكم الإدارية
+            </h2>
+            <p class="admin-modal__subtitle">
+              هذه اللوحة تظهر فقط للحساب المالك وتتحكم في صلاحيات المستخدمين وما
+              يظهر لهم داخل النظام.
+            </p>
           </div>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body admin-modal__body">
           <div class="admin-summary" id="adminSummary"></div>
           <div class="admin-toolbar">
-            <button class="btn btn--secondary btn--sm" data-action="open-activity-log">سجل النشاطات</button>
+            <button
+              class="btn btn--secondary btn--sm"
+              data-action="open-activity-log">
+              سجل النشاطات
+            </button>
           </div>
           <div class="admin-users-list" id="adminUsersList"></div>
         </div>
         <div class="modal__footer">
-          <button class="btn btn--primary btn--sm" data-action="refresh-admin-panel">تحديث القائمة</button>
-          <button class="btn btn--ghost btn--sm" data-action="close-modal">إغلاق</button>
+          <button
+            class="btn btn--primary btn--sm"
+            data-action="refresh-admin-panel">
+            تحديث القائمة
+          </button>
+          <button class="btn btn--ghost btn--sm" data-action="close-modal">
+            إغلاق
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="profilePanelModal" role="dialog" aria-modal="true" aria-labelledby="profilePanelTitle">
+    <div
+      class="modal"
+      id="profilePanelModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profilePanelTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content modal__content--sm">
         <div class="modal__header">
           <div>
             <h2 class="modal__title" id="profilePanelTitle">حسابي</h2>
-            <p class="admin-modal__subtitle">يمكنك تعديل الاسم الظاهر والبريد الإلكتروني الخاص بك.</p>
+            <p class="admin-modal__subtitle">
+              يمكنك تعديل الاسم الظاهر والبريد الإلكتروني الخاص بك.
+            </p>
           </div>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body">
           <form id="profileForm" class="edit-form">
             <div class="form-field">
-              <label class="form-label" for="profileDisplayName">الاسم الظاهر</label>
-              <input type="text" id="profileDisplayName" class="form-input" required />
+              <label class="form-label" for="profileDisplayName"
+                >الاسم الظاهر</label
+              >
+              <input
+                type="text"
+                id="profileDisplayName"
+                class="form-input"
+                required />
             </div>
             <div class="form-field">
-              <label class="form-label" for="profileEmail">البريد الإلكتروني</label>
-              <input type="email" id="profileEmail" class="form-input" required />
+              <label class="form-label" for="profileEmail"
+                >البريد الإلكتروني</label
+              >
+              <input
+                type="email"
+                id="profileEmail"
+                class="form-input"
+                required />
             </div>
-            <p class="auth-hint">إذا طلب Firebase إعادة تسجيل الدخول عند تغيير البريد، سجّل خروج ثم ادخل مرة أخرى وأعد المحاولة.</p>
+            <p class="auth-hint">
+              إذا طلب Firebase إعادة تسجيل الدخول عند تغيير البريد، سجّل خروج ثم
+              ادخل مرة أخرى وأعد المحاولة.
+            </p>
           </form>
         </div>
         <div class="modal__footer">
-          <button class="btn btn--primary btn--sm" data-action="save-profile">حفظ التعديلات</button>
-          <button class="btn btn--ghost btn--sm" data-action="close-modal">إلغاء</button>
+          <button class="btn btn--primary btn--sm" data-action="save-profile">
+            حفظ التعديلات
+          </button>
+          <button class="btn btn--ghost btn--sm" data-action="close-modal">
+            إلغاء
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal" id="activityLogModal" role="dialog" aria-modal="true" aria-labelledby="activityLogTitle">
+    <div
+      class="modal"
+      id="activityLogModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="activityLogTitle">
       <div class="modal__backdrop" data-action="close-modal"></div>
       <div class="modal__content modal__content--lg admin-modal">
         <div class="modal__header">
           <div>
             <h2 class="modal__title" id="activityLogTitle">سجل النشاطات</h2>
-            <p class="admin-modal__subtitle">يعرض جميع العمليات المهمة داخل التطبيق بالتاريخ والوقت والمستخدم المنفذ.</p>
+            <p class="admin-modal__subtitle">
+              يعرض جميع العمليات المهمة داخل التطبيق بالتاريخ والوقت والمستخدم
+              المنفذ.
+            </p>
           </div>
-          <button class="btn btn--ghost btn--icon" data-action="close-modal" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <button
+            class="btn btn--ghost btn--icon"
+            data-action="close-modal"
+            aria-label="إغلاق">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
           </button>
         </div>
         <div class="modal__body admin-modal__body">
           <div class="activity-log-list" id="activityLogList"></div>
         </div>
         <div class="modal__footer">
-          <button class="btn btn--primary btn--sm" data-action="refresh-activity-log">تحديث السجل</button>
-          <button class="btn btn--ghost btn--sm" data-action="close-modal">إغلاق</button>
+          <button
+            class="btn btn--primary btn--sm"
+            data-action="refresh-activity-log">
+            تحديث السجل
+          </button>
+          <button class="btn btn--ghost btn--sm" data-action="close-modal">
+            إغلاق
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Autocomplete portal -->
-    <div id="autocompleteList" class="autocomplete-list autocomplete-list--portal" role="listbox" aria-label="اقتراحات المواد"></div>
+    <div
+      id="autocompleteList"
+      class="autocomplete-list autocomplete-list--portal"
+      role="listbox"
+      aria-label="اقتراحات المواد"></div>
 
     <!-- Toast -->
-    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+    <div
+      class="toast-container"
+      id="toastContainer"
+      aria-live="polite"
+      aria-atomic="false"></div>
 
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>

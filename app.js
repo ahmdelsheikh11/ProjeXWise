@@ -1579,7 +1579,7 @@ const Renderer = {
                         <div class="project-card__meta">
                             ${p.phone   ? `<span class="project-card__meta-item">📞 ${escapeHtml(p.phone)}</span>` : ''}
                             ${p.emirate ? `<span class="project-card__meta-item">📍 ${escapeHtml(p.emirate)}</span>` : ''}
-                            <span class="project-card__meta-item">ًں“… ${formatDate(p.date)}</span>
+                            <span class="project-card__meta-item"> 📅 ${formatDate(p.date)}</span>
                             <span class="project-status-badge project-status-badge--${isDone ? 'done' : 'active'}">${isDone ? 'مسلّم' : stageLabel}</span>
                         </div>
                     </div>

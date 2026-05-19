@@ -1,4 +1,5 @@
 import { CONFIG } from './config.js';
+import { hasProjectIdentity } from '../state.js';
 
 /** Returns today as YYYY-MM-DD */
 export function todayString() {
@@ -172,4 +173,7 @@ export function normaliseProject(project) {
     project.currentStage = detectProjectStage(project);
     stampProjectDates(project);
     return project;
+}
+export function hasProjectIdentity(project = AppState.current) {
+    return !!String(project?.name || '').trim();
 }

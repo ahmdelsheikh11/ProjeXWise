@@ -1,6 +1,6 @@
 // js/main.js - Entry point with robust initialization
 import { Theme } from './modules/theme.js';
-import { AppState, createEmptyProject } from './state.js';
+import { AppState, createEmptyProject, hasProjectIdentity } from './state.js';
 import { DB, hasPermission, requirePermission, isCurrentOwner, getCurrentPermissions, onProjectsCacheUpdate } from './db.js';
 import { Toast } from './modules/toast.js';
 import { Confirm } from './modules/confirm.js';
@@ -64,6 +64,7 @@ window.calculateProjectProgress = calculateProjectProgress;
 window.detectProjectStage = detectProjectStage;
 window.stampProjectDates = stampProjectDates;
 window.escapeHtml = escapeHtml;
+window.hasProjectIdentity = hasProjectIdentity;
 
 // Helper for workspace visibility
 window.updateProjectWorkspaceVisibility = function() {

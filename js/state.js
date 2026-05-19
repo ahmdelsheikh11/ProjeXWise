@@ -1,6 +1,8 @@
 // js/state.js
 import { CONFIG, WORKFLOW_STEP_KEYS } from './config.js';
 import { generateProjectId, todayString } from './utils.js';
+import { hasProjectIdentity } from './state.js';
+window.hasProjectIdentity = hasProjectIdentity;
 
 export function createEmptyProject() {
     const items    = {};

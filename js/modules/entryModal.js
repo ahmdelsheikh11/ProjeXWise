@@ -1,4 +1,4 @@
-import { AppState } from '../state.js';
+import { AppState, hasProjectIdentity } from '../state.js';
 import { CONFIG } from '../config.js';
 import { DB } from '../db.js';
 import { Toast } from './toast.js';
@@ -7,7 +7,7 @@ import { DisplayRenderer } from './displayRenderer.js';
 import { Designs } from './designs.js';
 import { SpecsNotes } from './specsNotes.js';
 import { LPO } from './lpo.js';
-import { formatNumber, hasProjectIdentity, calculateProjectProgress, detectProjectStage, stampProjectDates } from '../utils.js';
+import { formatNumber, calculateProjectProgress, detectProjectStage, stampProjectDates } from '../utils.js';
 
 export const EntryModal = {
     _open: false,

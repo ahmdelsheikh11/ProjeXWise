@@ -1,7 +1,7 @@
+// js/state.js
 import { CONFIG, WORKFLOW_STEP_KEYS } from './config.js';
 import { generateProjectId, todayString } from './utils.js';
 
-/** Creates a fresh empty project object */
 export function createEmptyProject() {
     const items    = {};
     const workflow = {};
@@ -48,7 +48,6 @@ export function createEmptyProject() {
     };
 }
 
-/** Mutable application state (single object) */
 export const AppState = {
     current: createEmptyProject(),
     db:      null,
@@ -57,6 +56,15 @@ export const AppState = {
     currentUserProfile: null,
     usersCache: [],
     hasActiveProject: false,
+    // cache للمشاريع مع دعم التحميل التدريجي
+    projectsCache: {
+        all: null,          // جميع المشاريع (بعد التحميل الكامل)
+        chunks: [],         // مصفوفة من الدفعات (كل دفعة 20 مشروع)
+        totalCount: 0,      // العدد الإجمالي للمشاريع (قد لا يكون معروفاً مسبقاً)
+        isLoading: false,
+        listeners: [],      // دوال استدعاء عند إضافة دفعة جديدة
+        timestamp: null,
+    },
 };
 
 export function hasProjectIdentity(project = AppState.current) {

@@ -1,7 +1,7 @@
-// main.js - Entry point for the modularized app
+// js/main.js - Entry point with robust initialization
 import { Theme } from './modules/theme.js';
 import { AppState, createEmptyProject } from './state.js';
-import { DB, hasPermission, requirePermission, isCurrentOwner, getCurrentPermissions } from './db.js';
+import { DB, hasPermission, requirePermission, isCurrentOwner, getCurrentPermissions, onProjectsCacheUpdate } from './db.js';
 import { Toast } from './modules/toast.js';
 import { Confirm } from './modules/confirm.js';
 import { Modal } from './modules/modal.js';
@@ -23,7 +23,7 @@ import { printFullReport, printSpecsOnly, printSpecsWithDesigns, printDashboard,
 import { CONFIG, WORKFLOW_STEP_KEYS, STAGE_LABELS } from './config.js';
 import { deepClone, calculateProjectProgress, detectProjectStage, stampProjectDates, escapeHtml } from './utils.js';
 
-// Make some functions globally available for event handlers
+// Make required functions globally available for inline event handlers
 window.Project = Project;
 window.Toast = Toast;
 window.Confirm = Confirm;
@@ -92,16 +92,38 @@ window.updateProjectWorkspaceVisibility = function() {
 // Helper for AuthSession to set profile (circular dependency workaround)
 window.__ensureProfile = AuthSession.ensureProfile.bind(AuthSession);
 
-// Page loader
+// ---------- Enhanced PageLoader ----------
 const PageLoader = {
+    _textEl: null,
+    _initialized: false,
+    
+    _ensureElements() {
+        if (this._initialized) return true;
+        this._textEl = document.getElementById('pageLoaderText');
+        if (!this._textEl) {
+            console.warn('PageLoader: could not find #pageLoaderText');
+            return false;
+        }
+        this._initialized = true;
+        return true;
+    },
+
     show(message) {
-        const textEl = document.getElementById('pageLoaderText');
-        if (message && textEl) textEl.textContent = message;
+        if (!this._ensureElements()) return;
+        if (message) this._textEl.textContent = message;
         document.body.classList.add('app-loading');
         document.body.classList.remove('app-ready');
     },
+
     finish() {
+        if (!this._ensureElements()) {
+            // if elements missing, force removal of loader class anyway
+            document.body.classList.remove('app-loading');
+            document.body.classList.add('app-ready');
+            return Promise.resolve();
+        }
         return new Promise((resolve) => {
+            // use double rAF to ensure style calculation is done
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     document.body.classList.remove('app-loading');
@@ -111,12 +133,21 @@ const PageLoader = {
             });
         });
     },
+
+    error(message) {
+        if (!this._ensureElements()) return;
+        this._textEl.textContent = message || 'حدث خطأ أثناء التحميل. حاول تحديث الصفحة.';
+        console.error(message);
+        // keep loader visible but show error
+    }
 };
 
-// Live listeners setup
+// ---------- Live Listeners Setup (safe) ----------
 function setupLiveListeners() {
-    ['discountInput', 'paidInput', 'totalAmountInput'].forEach(id => {
-        document.getElementById(id)?.addEventListener('input', () => {
+    // Only if elements exist
+    const discountInput = document.getElementById('discountInput');
+    if (discountInput) {
+        discountInput.addEventListener('input', () => {
             const snapshot = deepClone(AppState.current);
             snapshot.financials = {
                 discount: parseFloat(document.getElementById('discountInput')?.value) || 0,
@@ -125,30 +156,55 @@ function setupLiveListeners() {
             };
             Renderer.renderKPIs(snapshot);
         });
-    });
+    }
+    const paidInput = document.getElementById('paidInput');
+    if (paidInput) {
+        paidInput.addEventListener('input', () => {
+            const snapshot = deepClone(AppState.current);
+            snapshot.financials = {
+                discount: parseFloat(document.getElementById('discountInput')?.value) || 0,
+                paid: parseFloat(document.getElementById('paidInput')?.value) || 0,
+                totalAmount: parseFloat(document.getElementById('totalAmountInput')?.value) || 0,
+            };
+            Renderer.renderKPIs(snapshot);
+        });
+    }
+    const totalAmountInput = document.getElementById('totalAmountInput');
+    if (totalAmountInput) {
+        totalAmountInput.addEventListener('input', () => {
+            const snapshot = deepClone(AppState.current);
+            snapshot.financials = {
+                discount: parseFloat(document.getElementById('discountInput')?.value) || 0,
+                paid: parseFloat(document.getElementById('paidInput')?.value) || 0,
+                totalAmount: parseFloat(document.getElementById('totalAmountInput')?.value) || 0,
+            };
+            Renderer.renderKPIs(snapshot);
+        });
+    }
 
-    function setupDropZone(zoneId, onDrop) {
-        const zone = document.getElementById(zoneId);
-        if (!zone) return;
+    // Design drop zone
+    const dropZone = document.getElementById('designDropZone');
+    if (dropZone) {
+        const onDrop = (files) => {
+            const input = document.getElementById('designFileInput');
+            if (input) input.files = files;
+            Designs.upload();
+        };
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt =>
-            zone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); })
+            dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); })
         );
-        zone.addEventListener('dragover', () => zone.classList.add('dragover'));
-        zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-        zone.addEventListener('drop', (e) => {
-            zone.classList.remove('dragover');
+        dropZone.addEventListener('dragover', () => dropZone.classList.add('dragover'));
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            dropZone.classList.remove('dragover');
             if (e.dataTransfer.files.length > 0) onDrop(e.dataTransfer.files);
         });
     }
-    setupDropZone('designDropZone', (files) => {
-        const input = document.getElementById('designFileInput');
-        if (input) input.files = files;
-        Designs.upload();
-    });
 
+    // Autocomplete
     const itemNameInput = document.getElementById('itemNameInput');
-    let autocompleteTimeout = null;
     if (itemNameInput) {
+        let autocompleteTimeout = null;
         itemNameInput.addEventListener('input', (e) => {
             clearTimeout(autocompleteTimeout);
             const q = e.target.value.trim();
@@ -171,101 +227,147 @@ function setupLiveListeners() {
         });
         itemNameInput.addEventListener('blur', () => setTimeout(() => Autocomplete.hide(), 200));
     }
-    document.getElementById('autocompleteList')?.addEventListener('click', (e) => {
-        const item = e.target.closest('.autocomplete-item');
-        if (item) Autocomplete.select(item);
-    });
-    document.getElementById('specsNotesInput')?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { e.preventDefault(); SpecsNotes.add(); }
-    });
-    document.getElementById('itemNeedsPaintInput')?.addEventListener('change', (e) => {
-        const show = e.target.checked;
-        const paintFields = document.getElementById('paintFields');
-        if (paintFields) paintFields.style.display = show ? 'grid' : 'none';
-        if (show) {
-            const colorInput = document.getElementById('itemPaintColorInput');
-            if (colorInput) colorInput.value = AppState.current.specifications.doorColor || '';
-        } else {
-            const costInput = document.getElementById('itemPaintCostInput');
-            const colorInput = document.getElementById('itemPaintColorInput');
-            if (costInput) costInput.value = '';
-            if (colorInput) colorInput.value = '';
-        }
-    });
-    document.getElementById('doorColorInput')?.addEventListener('input', (e) => {
-        if (document.getElementById('itemNeedsPaintInput')?.checked) {
-            const paintColor = document.getElementById('itemPaintColorInput');
-            if (paintColor) paintColor.value = e.target.value;
-        }
-    });
-    document.getElementById('lpoTaxInput')?.addEventListener('change', (e) => {
-        const taxRateField = document.getElementById('taxRateField');
-        if (taxRateField) taxRateField.style.display = e.target.checked ? 'block' : 'none';
-    });
-    document.getElementById('editItemNeedsPaint')?.addEventListener('change', (e) => {
-        const paintFields = document.getElementById('editPaintFields');
-        if (paintFields) paintFields.style.display = e.target.checked ? 'block' : 'none';
-    });
-    document.getElementById('editItemForm')?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { e.preventDefault(); Items.update(); }
-    });
-    const projectsSearch = document.getElementById('projectsSearchInput');
-    if (projectsSearch) {
-        projectsSearch.addEventListener('input', (e) => {
-            const q = e.target.value.trim().toLowerCase();
-            const filtered = q
-                ? Renderer._allProjects.filter(p =>
-                    (p.client || '').toLowerCase().includes(q) ||
-                    (p.id || '').toLowerCase().includes(q) ||
-                    (p.name || '').toLowerCase().includes(q) ||
-                    (p.phone || '').toLowerCase().includes(q) ||
-                    (p.emirate || '').toLowerCase().includes(q))
-                : Renderer._allProjects;
-            Renderer._renderProjectCards(filtered);
+    const autocompleteList = document.getElementById('autocompleteList');
+    if (autocompleteList) {
+        autocompleteList.addEventListener('click', (e) => {
+            const item = e.target.closest('.autocomplete-item');
+            if (item) Autocomplete.select(item);
         });
     }
-    document.getElementById('importFileInput')?.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        if (!file.name.endsWith('.json')) {
-            Toast.show('الملف يجب أن يكون بصيغة JSON', 'error');
-            return;
-        }
-        const success = await Project.importFromFile(file);
-        e.target.value = '';
-        if (success) { Toast.show('تم استيراد المشروع بنجاح'); Modal.closeAll(); }
-        else Toast.show('خطأ في استيراد المشروع', 'error');
-    });
+
+    // Specs notes enter
+    const specsNotesInput = document.getElementById('specsNotesInput');
+    if (specsNotesInput) {
+        specsNotesInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); SpecsNotes.add(); }
+        });
+    }
+
+    // Paint fields toggle
+    const needsPaintCheck = document.getElementById('itemNeedsPaintInput');
+    if (needsPaintCheck) {
+        needsPaintCheck.addEventListener('change', (e) => {
+            const show = e.target.checked;
+            const paintFields = document.getElementById('paintFields');
+            if (paintFields) paintFields.style.display = show ? 'grid' : 'none';
+            if (show) {
+                const paintColor = document.getElementById('itemPaintColorInput');
+                if (paintColor) paintColor.value = AppState.current.specifications.doorColor || '';
+            } else {
+                const paintCost = document.getElementById('itemPaintCostInput');
+                const paintColor = document.getElementById('itemPaintColorInput');
+                if (paintCost) paintCost.value = '';
+                if (paintColor) paintColor.value = '';
+            }
+        });
+    }
+
+    // Door color to paint color sync
+    const doorColorInput = document.getElementById('doorColorInput');
+    if (doorColorInput) {
+        doorColorInput.addEventListener('input', (e) => {
+            if (document.getElementById('itemNeedsPaintInput')?.checked) {
+                const paintColor = document.getElementById('itemPaintColorInput');
+                if (paintColor) paintColor.value = e.target.value;
+            }
+        });
+    }
+
+    // Tax rate toggle
+    const lpoTaxCheck = document.getElementById('lpoTaxInput');
+    if (lpoTaxCheck) {
+        lpoTaxCheck.addEventListener('change', (e) => {
+            const taxRateField = document.getElementById('taxRateField');
+            if (taxRateField) taxRateField.style.display = e.target.checked ? 'block' : 'none';
+        });
+    }
+
+    // Edit modal paint toggle
+    const editNeedsPaint = document.getElementById('editItemNeedsPaint');
+    if (editNeedsPaint) {
+        editNeedsPaint.addEventListener('change', (e) => {
+            const paintFields = document.getElementById('editPaintFields');
+            if (paintFields) paintFields.style.display = e.target.checked ? 'block' : 'none';
+        });
+    }
+
+    // Edit form submit on enter
+    const editForm = document.getElementById('editItemForm');
+    if (editForm) {
+        editForm.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); Items.update(); }
+        });
+    }
+
+    // Projects modal search
+    const projectsSearch = document.getElementById('projectsSearchInput');
+    if (projectsSearch) {
+        let debounceTimer;
+        projectsSearch.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                if (Renderer.filterProjects) Renderer.filterProjects(e.target.value);
+            }, 300);
+        });
+    }
+
+    // Import file input
+    const importFileInput = document.getElementById('importFileInput');
+    if (importFileInput) {
+        importFileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.name.endsWith('.json')) {
+                Toast.show('الملف يجب أن يكون بصيغة JSON', 'error');
+                return;
+            }
+            const success = await Project.importFromFile(file);
+            e.target.value = '';
+            if (success) { Toast.show('تم استيراد المشروع بنجاح'); Modal.closeAll(); }
+            else Toast.show('خطأ في استيراد المشروع', 'error');
+        });
+    }
+
+    // Escape key closes modals
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') Modal.closeAll();
     });
-    document.getElementById('specsNotesList')?.addEventListener('keydown', (e) => {
-        const input = e.target.closest('[id^="noteEditInput-"]');
-        if (!input) return;
-        const idx = parseInt(input.dataset.noteIndex, 10);
-        if (e.key === 'Enter') { e.preventDefault(); SpecsNotes.confirmEdit(idx); }
-        if (e.key === 'Escape') { e.preventDefault(); SpecsNotes.cancelEdit(); }
-    });
-    window.addEventListener('scroll', () => { if (Autocomplete.active) Autocomplete._reposition(); }, { passive: true });
-    window.addEventListener('resize', () => { if (Autocomplete.active) Autocomplete._reposition(); }, { passive: true });
-    document.querySelector('.main-content')?.addEventListener('scroll', () => { if (Autocomplete.active) Autocomplete._reposition(); }, { passive: true });
+
+    // Inline note edit
+    const specsNotesList = document.getElementById('specsNotesList');
+    if (specsNotesList) {
+        specsNotesList.addEventListener('keydown', (e) => {
+            const input = e.target.closest('[id^="noteEditInput-"]');
+            if (!input) return;
+            const idx = parseInt(input.dataset.noteIndex, 10);
+            if (e.key === 'Enter') { e.preventDefault(); SpecsNotes.confirmEdit(idx); }
+            if (e.key === 'Escape') { e.preventDefault(); SpecsNotes.cancelEdit(); }
+        });
+    }
+
+    // Reposition autocomplete on scroll/resize
+    window.addEventListener('scroll', () => { if (Autocomplete.active && Autocomplete._reposition) Autocomplete._reposition(); }, { passive: true });
+    window.addEventListener('resize', () => { if (Autocomplete.active && Autocomplete._reposition) Autocomplete._reposition(); }, { passive: true });
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.addEventListener('scroll', () => { if (Autocomplete.active && Autocomplete._reposition) Autocomplete._reposition(); }, { passive: true });
+    }
 }
 
 function setupFieldValidation() {
-    ['projectNameInput'].forEach(id => {
-        const field = document.getElementById(id);
-        if (!field) return;
-        field.addEventListener('blur', () => {
-            field.style.borderColor = field.value.trim() ? '' : 'var(--clr-danger)';
-            field.style.backgroundColor = field.value.trim() ? '' : 'var(--clr-danger-light)';
+    const projectName = document.getElementById('projectNameInput');
+    if (projectName) {
+        projectName.addEventListener('blur', () => {
+            projectName.style.borderColor = projectName.value.trim() ? '' : 'var(--clr-danger)';
+            projectName.style.backgroundColor = projectName.value.trim() ? '' : 'var(--clr-danger-light)';
         });
-        field.addEventListener('input', () => {
-            if (field.value.trim()) {
-                field.style.borderColor = 'var(--clr-success)';
-                field.style.backgroundColor = 'var(--clr-success-light)';
+        projectName.addEventListener('input', () => {
+            if (projectName.value.trim()) {
+                projectName.style.borderColor = 'var(--clr-success)';
+                projectName.style.backgroundColor = 'var(--clr-success-light)';
             }
         });
-    });
+    }
 }
 
 function setupViewSwitcher() {
@@ -275,6 +377,8 @@ function setupViewSwitcher() {
         dashboard: 'dashboardView',
     };
     const buttons = document.querySelectorAll('[data-view]');
+    if (!buttons.length) return;
+
     async function activateView(viewKey) {
         if (viewKey === 'board' && !hasPermission('canViewBoard')) {
             Toast.show('لا تملك صلاحية الوصول إلى لوحة الإنتاج', 'error');
@@ -297,15 +401,20 @@ function setupViewSwitcher() {
             Toast.show('خطأ في تحميل البيانات', 'error');
         }
     }
+
     buttons.forEach(btn => btn.addEventListener('click', () => activateView(btn.dataset.view)));
+
+    // Set default view to board (or project if board not allowed)
+    const defaultView = hasPermission('canViewBoard') ? 'board' : 'project';
     Object.entries(views).forEach(([key, id]) => {
         const el = document.getElementById(id);
-        if (el) el.style.display = (key === 'board') ? 'block' : 'none';
+        if (el) el.style.display = (key === defaultView) ? 'block' : 'none';
     });
-    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.view === 'board'));
-    activateView('board');
+    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.view === defaultView));
+    activateView(defaultView);
 }
 
+// Auto-save UI
 const AutosaveUI = {
     _el: null, _text: null,
     _init() {
@@ -369,6 +478,7 @@ function setupAutoSave() {
     });
 }
 
+// ---------- Global Action Handler ----------
 async function handleAction(e) {
     const target = e.target.closest('[data-action]');
     if (!target) return;
@@ -382,7 +492,7 @@ async function handleAction(e) {
     }
     if (action === 'toggle-header-menu') { MobileHeader.toggle(); return; }
 
-    // Permission checks (simplified for brevity - in production, add more)
+    // Permission checks (simplified)
     const editActions = ['save-project', 'add-spec-note', 'edit-spec-note', 'confirm-edit-note', 'cancel-edit-note', 'delete-spec-note', 'add-item', 'edit-item-modal', 'delete-item', 'update-item', 'toggle-workflow', 'upload-designs', 'delete-design', 'clear-designs-upload'];
     const createActions = ['new-project', 'duplicate-project'];
     const deleteActions = ['delete-project'];
@@ -396,7 +506,7 @@ async function handleAction(e) {
     if (importActions.includes(action) && !hasPermission('canImportProjects')) { Toast.show('لا تملك صلاحية الاستيراد', 'error'); return; }
     if (action === 'delete-all' && !isCurrentOwner()) { Toast.show('هذا الإجراء متاح للمالك فقط', 'error'); return; }
 
-    // Route to existing handlers (simplified mapping)
+    // Route actions
     if (action === 'new-project') Project.createNew();
     else if (action === 'save-project') Project.save();
     else if (action === 'export-project') Project.export();
@@ -435,7 +545,7 @@ async function handleAction(e) {
     else if (action === 'delete-design') Designs.delete(parseInt(target.dataset.designId, 10));
     else if (action === 'clear-designs-upload') Designs.clearUpload();
     else if (action === 'open-projects-modal') {
-        const projects = await DB.loadProjects();
+        const projects = await DB.loadProjectsWithCache();
         await Renderer.renderProjectsList(projects);
         Modal.open('projectsModal');
         const searchEl = document.getElementById('projectsSearchInput');
@@ -495,7 +605,7 @@ async function handleAction(e) {
         const sortBy = target.dataset.sort;
         const column = document.querySelector(`.board-column[data-stage="${stage}"]`);
         if (!column) return;
-        const projects = await DB.loadProjects();
+        const projects = await DB.loadProjectsWithCache();
         const stageProjects = projects.filter(p => p.currentStage === stage);
         stageProjects.sort((a, b) => {
             if (sortBy === 'progress') return b.progress - a.progress;
@@ -513,20 +623,47 @@ async function handleAction(e) {
     }
 }
 
+// ---------- Robust Initialization ----------
 async function init() {
+    let initError = null;
     try {
         PageLoader.show('نرتب إعدادات التطبيق أولاً.');
         Theme.init();
+
+        // Ensure DOM is fully loaded
         if (document.readyState !== 'complete') {
             await new Promise(resolve => {
                 if (document.readyState === 'complete') resolve();
-                else document.addEventListener('DOMContentLoaded', resolve, { once: true });
+                else window.addEventListener('load', resolve, { once: true });
             });
         }
+
+        // Extra safeguard: wait for a tiny frame to ensure body classes exist
+        await new Promise(r => requestAnimationFrame(r));
+
         PageLoader.show('نراجع الجلسة والصلاحيات.');
         await AuthSession.ensureAuthenticated();
+
         PageLoader.show('نسحب البيانات ونجهز المشاريع.');
         await DB.init();
+
+        // Initial chunk load for projects modal (optional, but good for speed)
+        const { projects: initialProjects } = await DB.loadProjectsChunk(20);
+        AppState.projectsCache.all = initialProjects;
+        AppState.projectsCache.timestamp = Date.now();
+        AppState.projectsCache.hasMore = true;
+        await Renderer.renderProjectsList(initialProjects);
+
+        // Background load of remaining projects
+        DB.loadAllProjectsInChunks((chunk, total) => {
+            console.log(`Loaded ${total} projects so far`);
+        }).then(allProjects => {
+            AppState.projectsCache.all = allProjects;
+            AppState.projectsCache.hasMore = false;
+            if (Renderer._virtualScroller) {
+                Renderer._virtualScroller.setItems(allProjects);
+            }
+        }).catch(err => console.warn('Background load error:', err));
 
         PageLoader.show('نرتب الواجهة لتظهر كاملة وجاهزة.');
         document.addEventListener('click', handleAction);
@@ -541,6 +678,8 @@ async function init() {
         setupAutoSave();
         UserAccess.apply();
         window.updateProjectWorkspaceVisibility();
+
+        // Finalize loader
         await PageLoader.finish();
 
         if (!localStorage.getItem('welcomeShown')) {
@@ -549,8 +688,11 @@ async function init() {
         }
     } catch (err) {
         console.error('Initialisation error:', err);
+        initError = err;
+        PageLoader.error('خطأ في تهيئة النظام: ' + (err.message || err));
+        // Still try to finish loader to avoid eternal spinner
         await PageLoader.finish();
-        Toast.show('خطأ في تهيئة النظام: ' + err.message, 'error');
+        Toast.show('خطأ في تهيئة النظام: ' + (err.message || 'يرجى تحديث الصفحة'), 'error');
     }
 }
 
@@ -563,10 +705,11 @@ async function init() {
     document.documentElement.setAttribute('data-theme', theme);
 })();
 
+// Start initialization after DOM ready, but also after a short delay to ensure all elements exist
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(init, 80));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
 } else {
-    setTimeout(init, 80);
+    setTimeout(init, 100);
 }
 
 // Sticky actions bar
@@ -576,13 +719,15 @@ if (document.readyState === 'loading') {
         if (!bar) return;
         const sentinel = document.createElement('div');
         sentinel.style.cssText = 'position:absolute;height:1px;top:0;left:0;right:0;pointer-events:none;';
-        bar.parentElement.style.position = 'relative';
-        bar.parentElement.insertBefore(sentinel, bar);
-        const observer = new IntersectionObserver(
-            ([entry]) => bar.classList.toggle('is-stuck', !entry.isIntersecting),
-            { threshold: 1, rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height') || '64')}px 0px 0px 0px` }
-        );
-        observer.observe(sentinel);
+        if (bar.parentElement) {
+            bar.parentElement.style.position = 'relative';
+            bar.parentElement.insertBefore(sentinel, bar);
+            const observer = new IntersectionObserver(
+                ([entry]) => bar.classList.toggle('is-stuck', !entry.isIntersecting),
+                { threshold: 1, rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height') || '64')}px 0px 0px 0px` }
+            );
+            observer.observe(sentinel);
+        }
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, { once: true });
     else setup();

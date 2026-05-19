@@ -1,3 +1,4 @@
+// js/modules/productionBoard.js
 import { DB } from '../db.js';
 import { STAGE_LABELS, STAGE_ORDER } from '../config.js';
 import { escapeHtml, todayString } from '../utils.js';
@@ -7,7 +8,8 @@ export const ProductionBoard = {
         const boardEl = document.getElementById('productionBoard');
         if (!boardEl) return;
 
-        const projects = await DB.loadProjects();
+        // استخدام cache مع تحديث في الخلفية
+        const projects = await DB.loadProjectsWithCache();
 
         if (projects.length === 0) {
             boardEl.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg><p>لا توجد مشاريع محفوظة بعد.<br>قم بحفظ مشروع أولاً.</p></div>`;
@@ -49,7 +51,6 @@ export const ProductionBoard = {
                         </div>
                     </div>`;
             }).join('');
-
             return `
                 <div class="board-column" data-stage="${stage}">
                     <div class="column-header">
@@ -62,7 +63,6 @@ export const ProductionBoard = {
                     <div class="board-cards-container">${cardsHtml || '<p style="font-size:var(--text-xs);color:var(--clr-ink-ghost);text-align:center;padding:var(--sp-4);">لا توجد مشاريع</p>'}</div>
                 </div>`;
         }).join('');
-
         boardEl.innerHTML = `<div class="board-columns">${columnsHtml}</div>`;
     },
 };

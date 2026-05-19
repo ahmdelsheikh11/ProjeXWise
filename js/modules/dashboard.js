@@ -1,10 +1,11 @@
+// js/modules/dashboard.js
 import { DB } from '../db.js';
 import { STAGE_LABELS } from '../config.js';
 import { escapeHtml, formatDate, formatNumber, todayString } from '../utils.js';
 
 export const Dashboard = {
     async render() {
-        const projects = await DB.loadProjects();
+        const projects = await DB.loadProjectsWithCache();
         const dashboardEl = document.getElementById('dashboardContent');
         if (!dashboardEl) return;
 
